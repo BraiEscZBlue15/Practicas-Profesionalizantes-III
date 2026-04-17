@@ -1,0 +1,54 @@
+Herramientas para multimedia: firebase storage, supabase storage.
+Cloudinary, Mux, AWS S3 
+
+Archivos AutoCad: Autodesk Forge Viewer, ShareCAD (CADSoftTools)
+
+
+
+FRONTED: Material IU, telwing, Chakra.
+
+BACKEND: JavaScript, Python. 
+
+PROYECTO - "Repositorio de escuelas seguras".
+
+
+
+
+pendiente: -Consultar sobre el manejo de datos para ingresar a la pagina. Hacemos una base de datos independiente o podemos reutilizar datos ya existentes.
+	   - Manual de usuario. 
+
+
+
+1. Gestión de usuarios
+        -Login para diferentes perfiles de usuario (administrador, docentes, autoridades y estudiantes/personal).
+        -Verificación y autorización de usuarios a cargo del administrador.
+        -Inclusión de herramientas de verificación para autorizar usuarios (pendiente definir el método de validación).
+2. Administración de contenidos
+         -Carga de información y archivos multimedia (fotos, videos, audios, PDF, etc.).
+         -Revisión de la posibilidad de subir planos de AutoCAD u otros formatos técnicos.
+         -Carga de archivos exclusiva del administrador, garantizando control y seguridad.
+3. Visualización de información
+         -Acceso y visualización de información y archivos por parte de los usuarios, según su perfil y permisos.
+         -Definir interfaz clara y profesional para mostrar documentos y materiales multimedia.
+
+
+ESQUEMA TECNICO - Roles
+
+Roles de usuario:
+
+1.Administrador
+      -Autorizar/verificar usuarios.
+      -Cargar información y archivos multimedia (fotos, videos, audios, PDF, planos de AutoCAD).
+      -Gestionar categorías y secciones de contenidos.
+      -Controlar permisos de acceso.
+2.Docente/Autoridades
+      -Visualizar información y archivos multimedia.
+      -Acceder a materiales de seguridad e higiene.
+      -Consultar la posibilidad de cargar información y archivos multimedia con autorización del administtrador.
+3.Estudiante
+      -Visualizar información y archivos multimedia.
+      -Acceder a protocolos, guías y materiales de estudio.
+      -Consultar recursos de seguridad e higiene.
+4.Personal/otros usuarios
+       -Visualizar información relevante según su perfil.
+       -Acceder a documentos y protocolos básicos.
