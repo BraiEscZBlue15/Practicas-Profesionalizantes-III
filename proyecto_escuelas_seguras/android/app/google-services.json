@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "399588064215",
+    "project_id": "proyecto-escuelas-seguras",
+    "storage_bucket": "proyecto-escuelas-seguras.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399588064215:android:6b5701ecf4043b116a2992",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_escuelas_seguras"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBExaJsfBqRGPo8BIp6dJMau50Z0wvheHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
