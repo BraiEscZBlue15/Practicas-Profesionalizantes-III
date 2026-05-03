@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escuelas Seguras | Jefatura Distrital San Miguel</title>
+    <meta name="description" content="Información de seguridad e higiene institucional.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="dashboard-page">
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="../index.html" class="logo">
+                <i class="ph ph-bank logo-icon"></i>
+                <span class="logo-text">Jefatura Distrital San Miguel</span>
+            </a>
+            <nav class="nav" aria-label="Navegación principal">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="#" class="nav-link">Documentos</a></li>
+                    <li><a href="#" class="nav-link">Instituciones</a></li>
+                    <li><a href="#" class="nav-link">Recursos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <span id="nombreUsuario" class="user-display"></span>
+                <button id="btnLogout" class="btn btn-sm btn-outline" title="Cerrar sesión">
+                    <i class="ph ph-sign-out"></i> Salir
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+
+        <!-- ==================================================================
+             MÓDULO 1: ANTE UNA EMERGENCIA (prioridad máxima)
+             ================================================================== -->
+        <section class="modulo-emergencia">
+            <div class="container">
+                <div class="modulo-emergencia-header">
+                    <i class="ph ph-warning"></i>
+                    <h2>Ante una emergencia</h2>
+                </div>
+                <p class="modulo-emergencia-subtitulo">Información prioritaria. Ante cualquier situación de riesgo, consultá estos recursos inmediatamente.</p>
+
+                <div class="emergencia-grid">
+                    <!-- Planos de evacuación -->
+                    <div class="emergencia-card">
+                        <div class="emergencia-card-icon">
+                            <i class="ph ph-map-pin"></i>
+                        </div>
+                        <h3>Planos de Evacuación</h3>
+                        <p>Rutas de escape, salidas de emergencia y puntos de encuentro del establecimiento.</p>
+                        <div class="visor-container" id="visorPlanosBase" style="height: 280px;">
+                            <div class="visor-placeholder">
+                                <i class="ph ph-map-pin"></i>
+                                <p>Plano no disponible momentáneamente.</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-emergencia btn-full" style="margin-top: 1rem;">
+                            <i class="ph ph-download"></i> Descargar plano (PDF)
+                        </button>
+                    </div>
+
+                    <!-- Contactos de emergencia -->
+                    <div class="emergencia-card">
+                        <div class="emergencia-card-icon">
+                            <i class="ph ph-phone-call"></i>
+                        </div>
+                        <h3>Contactos de Emergencia</h3>
+                        <p>Números de contacto directo ante cualquier situación de riesgo.</p>
+                        <ul class="contactos-emergencia">
+                            <li>
+                                <span class="contacto-icon"><i class="ph ph-fire-extinguisher"></i></span>
+                                <div>
+                                    <strong>Bomberos</strong>
+                                    <span class="contacto-numero">100 / 4664-2222</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="contacto-icon"><i class="ph ph-first-aid"></i></span>
+                                <div>
+                                    <strong>Emergencias Médicas</strong>
+                                    <span class="contacto-numero">107</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="contacto-icon"><i class="ph ph-shield"></i></span>
+                                <div>
+                                    <strong>Policía</strong>
+                                    <span class="contacto-numero">911</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="contacto-icon"><i class="ph ph-building"></i></span>
+                                <div>
+                                    <strong>Defensa Civil</strong>
+                                    <span class="contacto-numero">103</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="contacto-icon"><i class="ph ph-user-circle"></i></span>
+                                <div>
+                                    <strong>Dirección del Establecimiento</strong>
+                                    <span class="contacto-numero">4664-1234</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             MÓDULO 2: PROTOCOLOS VIGENTES
+             ================================================================== -->
+        <section class="modulo-protocolos">
+            <div class="container">
+                <div class="modulo-header">
+                    <i class="ph ph-clipboard-text"></i>
+                    <h2>Protocolos Vigentes</h2>
+                </div>
+                <p class="modulo-subtitulo">Documentación oficial con procedimientos detallados para cada tipo de emergencia.</p>
+
+                <div class="protocolos-lista">
+                    <!-- Protocolo 1 -->
+                    <div class="protocolo-item">
+                        <div class="protocolo-icono">
+                            <i class="ph ph-fire-extinguisher"></i>
+                        </div>
+                        <div class="protocolo-info">
+                            <h4>Protocolo de Incendio</h4>
+                            <p>Procedimiento paso a paso ante focos de incendio: detección temprana, uso de matafuegos, roles del personal durante la evacuación y puntos de reunión establecidos. Incluye listado de equipamiento contra incendios disponible en cada planta.</p>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-sm btn-descarga">
+                            <i class="ph ph-download"></i> Descargar PDF
+                        </a>
+                    </div>
+
+                    <!-- Protocolo 2 -->
+                    <div class="protocolo-item">
+                        <div class="protocolo-icono">
+                            <i class="ph ph-first-aid"></i>
+                        </div>
+                        <div class="protocolo-info">
+                            <h4>Emergencia Médica y RCP</h4>
+                            <p>Guía de primeros auxilios para situaciones críticas: reanimación cardiopulmonar (RCP), maniobra de Heimlich, control de hemorragias y estabilización hasta la llegada de servicios de emergencia. Incluye ubicación de botiquines y DEA.</p>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-sm btn-descarga">
+                            <i class="ph ph-download"></i> Descargar PDF
+                        </a>
+                    </div>
+
+                    <!-- Protocolo 3 -->
+                    <div class="protocolo-item">
+                        <div class="protocolo-icono">
+                            <i class="ph ph-warning"></i>
+                        </div>
+                        <div class="protocolo-info">
+                            <h4>Sismo</h4>
+                            <p>Procedimiento de evacuación por movimiento sísmico: zonas seguras dentro del edificio, protocolo de repliegue, corte de suministros y verificación posterior de estructuras. Incluye croquis de zonas seguras por piso.</p>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-sm btn-descarga">
+                            <i class="ph ph-download"></i> Descargar PDF
+                        </a>
+                    </div>
+
+                    <!-- Protocolo 4 -->
+                    <div class="protocolo-item">
+                        <div class="protocolo-icono">
+                            <i class="ph ph-gas-cylinder"></i>
+                        </div>
+                        <div class="protocolo-info">
+                            <h4>Fuga de Gas</h4>
+                            <p>Protocolo de actuación ante pérdidas de gas: ventilación inmediata, corte de llaves de paso, prohibición de fuentes de ignición y notificación a la empresa proveedora. Plano con ubicación de llaves de corte de gas.</p>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-sm btn-descarga">
+                            <i class="ph ph-download"></i> Descargar PDF
+                        </a>
+                    </div>
+
+                    <!-- Protocolo 5 -->
+                    <div class="protocolo-item">
+                        <div class="protocolo-icono">
+                            <i class="ph ph-lightning"></i>
+                        </div>
+                        <div class="protocolo-info">
+                            <h4>Corte de Suministro Eléctrico</h4>
+                            <p>Procedimiento ante cortes de luz prolongados: activación de luces de emergencia, verificación de tableros, equipos críticos que requieren respaldo y listado de contactos de la empresa distribuidora.</p>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-sm btn-descarga">
+                            <i class="ph ph-download"></i> Descargar PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================================================================
+     MÓDULO 2 (ALTERNATIVO): PROTOCOLOS VIGENTES EN TARJETAS
+     ================================================================== -->
+<section class="modulo-protocolos-cards">
+    <div class="container">
+        <div class="modulo-header">
+            <i class="ph ph-clipboard-text"></i>
+            <h2>Protocolos Vigentes</h2>
+        </div>
+        <p class="modulo-subtitulo">Documentación oficial con procedimientos detallados para cada tipo de emergencia.</p>
+
+        <div class="cards-grid">
+            <!-- Protocolo 1 -->
+            <div class="protocolo-card">
+                <div class="protocolo-card-icono">
+                    <i class="ph ph-fire-extinguisher"></i>
+                </div>
+                <h4>Protocolo de Incendio</h4>
+                <p>Procedimiento paso a paso ante focos de incendio: detección temprana, uso de matafuegos, roles del personal durante la evacuación y puntos de reunión establecidos.</p>
+                <a href="#" class="btn btn-primary btn-sm btn-full">
+                    <i class="ph ph-download"></i> Descargar PDF
+                </a>
+            </div>
+
+            <!-- Protocolo 2 -->
+            <div class="protocolo-card">
+                <div class="protocolo-card-icono">
+                    <i class="ph ph-first-aid"></i>
+                </div>
+                <h4>Emergencia Médica y RCP</h4>
+                <p>Guía de primeros auxilios para situaciones críticas: RCP, maniobra de Heimlich, control de hemorragias y estabilización hasta la llegada de servicios de emergencia.</p>
+                <a href="#" class="btn btn-primary btn-sm btn-full">
+                    <i class="ph ph-download"></i> Descargar PDF
+                </a>
+            </div>
+
+            <!-- Protocolo 3 -->
+            <div class="protocolo-card">
+                <div class="protocolo-card-icono">
+                    <i class="ph ph-warning"></i>
+                </div>
+                <h4>Sismo</h4>
+                <p>Procedimiento de evacuación por movimiento sísmico: zonas seguras dentro del edificio, protocolo de repliegue y corte de suministros.</p>
+                <a href="#" class="btn btn-primary btn-sm btn-full">
+                    <i class="ph ph-download"></i> Descargar PDF
+                </a>
+            </div>
+
+            <!-- Protocolo 4 -->
+            <div class="protocolo-card">
+                <div class="protocolo-card-icono">
+                    <i class="ph ph-gas-cylinder"></i>
+                </div>
+                <h4>Fuga de Gas</h4>
+                <p>Protocolo de actuación ante pérdidas de gas: ventilación inmediata, corte de llaves de paso y notificación a la empresa proveedora.</p>
+                <a href="#" class="btn btn-primary btn-sm btn-full">
+                    <i class="ph ph-download"></i> Descargar PDF
+                </a>
+            </div>
+
+            <!-- Protocolo 5 -->
+            <div class="protocolo-card">
+                <div class="protocolo-card-icono">
+                    <i class="ph ph-lightning"></i>
+                </div>
+                <h4>Corte de Suministro Eléctrico</h4>
+                <p>Procedimiento ante cortes de luz prolongados: activación de luces de emergencia, verificación de tableros y equipos críticos.</p>
+                <a href="#" class="btn btn-primary btn-sm btn-full">
+                    <i class="ph ph-download"></i> Descargar PDF
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- ==================================================================
+             MÓDULO 3: RECURSOS COMPLEMENTARIOS
+             ================================================================== -->
+        <section class="modulo-recursos">
+            <div class="container">
+                <div class="modulo-header">
+                    <i class="ph ph-book-open"></i>
+                    <h2>Recursos Complementarios</h2>
+                </div>
+                <p class="modulo-subtitulo">Material de consulta, normativas y contenidos educativos sobre seguridad escolar.</p>
+
+                <div class="protocolos-lista">
+                    <!-- Recurso 1 -->
+                    <div class="protocolo-item">
+                        <div class="protocolo-icono">
+                            <i class="ph ph-article"></i>
+                        </div>
+                        <div class="protocolo-info">
+                            <h4>Guía de Seguridad Escolar</h4>
+                            <p>Documento integral con normativas vigentes del Ministerio de Educación. Abarca requisitos edilicios, conformación de brigadas, cronograma de simulacros obligatorios y marco legal aplicable a establecimientos educativos.</p>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-sm btn-descarga">
+                            <i class="ph ph-download"></i> Descargar PDF
+                        </a>
+                    </div>
+
+                    <!-- Recurso 2 -->
+                    <div class="protocolo-item">
+                        <div class="protocolo-icono">
+                            <i class="ph ph-video"></i>
+                        </div>
+                        <div class="protocolo-info">
+                            <h4>Video Instructivo de RCP</h4>
+                            <p>Material audiovisual con demostración práctica de reanimación cardiopulmonar en adultos y niños. Duración: 12 minutos. Producido por la Asociación de Cardiología.</p>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-sm btn-descarga">
+                            <i class="ph ph-download"></i> Ver video
+                        </a>
+                    </div>
+
+                    <!-- Recurso 3 -->
+                    <div class="protocolo-item">
+                        <div class="protocolo-icono">
+                            <i class="ph ph-calendar-check"></i>
+                        </div>
+                        <div class="protocolo-info">
+                            <h4>Cronograma de Simulacros 2024</h4>
+                            <p>Calendario anual con fechas programadas de simulacros de evacuación, capacitaciones obligatorias para el personal y jornadas de concientización con la comunidad educativa.</p>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-sm btn-descarga">
+                            <i class="ph ph-download"></i> Descargar PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Zona de acciones por rol -->
+        <div id="accionesRol" class="acciones-rol container">
+            <!-- portal.js base lo completa -->
+        </div>
+
+    </main>
+
+     <!-- Scripts <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/escuelas_seguras_base.js"></script> -->
+</body>
+
+</html>
