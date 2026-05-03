@@ -15,7 +15,7 @@
     <!-- Hoja de estilos principal -->
     <link rel="stylesheet" href="./assets/css/style.css">
 
-    <!-- Íconos (Phosphor Icons para un aspecto moderno y limpio) -->
+    <!-- Íconos (Phosphor Icons) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
@@ -24,13 +24,11 @@
     <!-- Navegación Principal -->
     <header class="header">
         <div class="container header-container">
-            <!-- Logo -->
             <a href="#" class="logo">
                 <i class="ph ph-bank logo-icon"></i>
                 <span class="logo-text">Jefatura Distrital San Miguel</span>
             </a>
 
-            <!-- Menú de Navegación -->
             <nav class="nav" aria-label="Navegación principal">
                 <ul class="nav-list">
                     <li><a href="#" class="nav-link active">Inicio</a></li>
@@ -40,10 +38,8 @@
                 </ul>
             </nav>
 
-            <!-- Acciones -->
-            <div class="header-actions">
-                <button class="btn-icon" aria-label="Buscar"><i class="ph ph-magnifying-glass"></i></button>
-                <a href="#" class="btn btn-primary btn-sm">Acceso</a>
+            <div class="header-actions" id="headerActions">
+                <!-- Renderizado dinámico por portal.js -->
             </div>
         </div>
     </header>
@@ -54,7 +50,6 @@
         <!-- Sección Hero -->
         <section class="hero container">
             <div class="hero-card">
-                <!-- Imagen de fondo se aplica por CSS -->
                 <div class="hero-content">
                     <span class="badge badge-accent">
                         <i class="ph-fill ph-graduation-cap"></i> THE ACADEMIC CURATOR
@@ -74,7 +69,6 @@
                 <p class="section-subtitle">Acceso directo a las plataformas de gestión y desarrollo académico.</p>
             </div>
 
-            <!-- Grilla de Tarjetas -->
             <div class="grid">
 
                 <!-- Tarjeta 1: Horizontes -->
@@ -105,18 +99,15 @@
                 </article>
 
                 <!-- Tarjeta 3: Escuelas Seguras -->
-                <article class="card card-disabled">
-                    <div class="card-header-flex">
-                        <div class="card-icon icon-gray">
-                            <i class="ph ph-shield-check"></i>
-                        </div>
-                        <span class="badge badge-gray">PRÓXIMAMENTE</span>
+                <article class="card">
+                    <div class="card-icon icon-cyan">
+                        <i class="ph ph-shield-check"></i>
                     </div>
                     <h3 class="card-title">Escuelas Seguras</h3>
                     <p class="card-text">Protocolos de prevención de riesgos, documentación respaldatoria y gestión
                         integral de la seguridad institucional.</p>
-                    <button class="btn btn-disabled btn-full card-action" disabled>En desarrollo <i
-                            class="ph ph-hourglass-high"></i></button>
+                    <a href="pages/escuelas_seguras.html" class="btn btn-primary btn-full card-action">Acceder <i
+                            class="ph ph-arrow-up-right"></i></a>
                 </article>
 
             </div>
@@ -141,6 +132,10 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/portal.js"></script>
 
 </body>
 

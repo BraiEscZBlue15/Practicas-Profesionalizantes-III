@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escuelas Seguras - Admin | Jefatura Distrital San Miguel</title>
+    <meta name="description" content="Panel de administración de Escuelas Seguras.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="dashboard-page">
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="../index.html" class="logo">
+                <i class="ph ph-bank logo-icon"></i>
+                <span class="logo-text">Jefatura Distrital San Miguel</span>
+            </a>
+            <nav class="nav" aria-label="Navegación principal">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="#" class="nav-link">Documentos</a></li>
+                    <li><a href="#" class="nav-link">Instituciones</a></li>
+                    <li><a href="#" class="nav-link">Recursos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <span id="nombreUsuario" class="user-display"></span>
+                <button id="btnLogout" class="btn btn-sm btn-outline" title="Cerrar sesión">
+                    <i class="ph ph-sign-out"></i> Salir
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main container">
+
+        <section id="vistaDashboard" class="dashboard-view">
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <span class="sidebar-label">Menú Admin</span>
+                    <button class="sidebar-btn active" data-seccion="inicio">
+                        <i class="ph ph-house"></i> Inicio
+                    </button>
+                    <button class="sidebar-btn" data-seccion="documentos">
+                        <i class="ph ph-file-text"></i> Documentos
+                    </button>
+                    <button class="sidebar-btn" data-seccion="checklist">
+                        <i class="ph ph-clipboard-text"></i> Checklist
+                    </button>
+                    <button class="sidebar-btn" data-seccion="incidentes">
+                        <i class="ph ph-warning-circle"></i> Incidentes
+                    </button>
+                    <button class="sidebar-btn" data-seccion="indicadores">
+                        <i class="ph ph-chart-bar"></i> Indicadores
+                    </button>
+                    <button class="sidebar-btn" data-seccion="planos">
+                        <i class="ph ph-map-pin"></i> Planos
+                    </button>
+                    <span class="sidebar-label" style="margin-top: 1rem;">Acciones</span>
+                    <button class="sidebar-btn" id="btnVistaPrevia">
+                        <i class="ph ph-eye"></i> Vista previa
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Contenido dinámico -->
+            <div class="dashboard-content" id="contenidoSeccion">
+                <!-- Renderizado por JS -->
+            </div>
+
+        </section>
+
+        <!-- Acceso denegado -->
+        <section id="vistaDenegada" class="acceso-denegado hidden">
+            <i class="ph ph-lock-key"></i>
+            <h2>Acceso denegado</h2>
+            <p>No tenés permisos para acceder a esta sección.</p>
+            <a href="../index.html" class="btn btn-primary">Volver al inicio</a>
+        </section>
+
+    </main>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/escuelas_seguras.js"></script>
+</body>
+
+</html>

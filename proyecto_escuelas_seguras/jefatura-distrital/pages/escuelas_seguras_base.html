@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escuelas Seguras | Jefatura Distrital San Miguel</title>
+    <meta name="description" content="Información de seguridad e higiene institucional.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="dashboard-page">
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="../index.html" class="logo">
+                <i class="ph ph-bank logo-icon"></i>
+                <span class="logo-text">Jefatura Distrital San Miguel</span>
+            </a>
+            <nav class="nav" aria-label="Navegación principal">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="#" class="nav-link">Documentos</a></li>
+                    <li><a href="#" class="nav-link">Instituciones</a></li>
+                    <li><a href="#" class="nav-link">Recursos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <span id="nombreUsuario" class="user-display"></span>
+                <button id="btnLogout" class="btn btn-sm btn-outline" title="Cerrar sesión">
+                    <i class="ph ph-sign-out"></i> Salir
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main container">
+
+        <section class="base-view">
+            <!-- Información crucial -->
+            <div class="base-hero">
+                <div class="base-hero-icon">
+                    <i class="ph ph-shield-check"></i>
+                </div>
+                <h1 class="base-hero-title">Escuelas Seguras</h1>
+                <p class="base-hero-text">
+                    Información esencial sobre protocolos de seguridad, evacuación y prevención de riesgos
+                    para toda la comunidad educativa.
+                </p>
+            </div>
+
+            <!-- Grid de información -->
+            <div class="base-grid">
+                
+                <!-- Planos de evacuación -->
+                <div class="base-card">
+                    <div class="base-card-header">
+                        <i class="ph ph-map-pin"></i>
+                        <h3>Planos de Evacuación</h3>
+                    </div>
+                    <div class="base-card-body">
+                        <p>Consultá los planos actualizados con rutas de evacuación y puntos de encuentro.</p>
+                        <div class="visor-container" id="visorPlanosBase" style="height: 350px;">
+                            <div class="visor-placeholder">
+                                <i class="ph ph-map-pin"></i>
+                                <p>Plano no disponible momentáneamente.</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-full" style="margin-top: 1rem;">
+                            <i class="ph ph-download"></i> Descargar plano (PDF)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Protocolos de emergencia -->
+                <div class="base-card">
+                    <div class="base-card-header">
+                        <i class="ph ph-file-text"></i>
+                        <h3>Protocolos de Emergencia</h3>
+                    </div>
+                    <div class="base-card-body">
+                        <ul class="base-lista">
+                            <li>
+                                <i class="ph ph-fire-extinguisher"></i>
+                                <div>
+                                    <strong>Incendio</strong>
+                                    <p>Protocolo de actuación ante focos de incendio.</p>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline" title="Descargar">
+                                    <i class="ph ph-download"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <i class="ph ph-first-aid"></i>
+                                <div>
+                                    <strong>Emergencia Médica</strong>
+                                    <p>Primeros auxilios y contacto con servicios de emergencia.</p>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline" title="Descargar">
+                                    <i class="ph ph-download"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <i class="ph ph-warning"></i>
+                                <div>
+                                    <strong>Sismo</strong>
+                                    <p>Procedimiento de evacuación por movimiento sísmico.</p>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline" title="Descargar">
+                                    <i class="ph ph-download"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contactos de emergencia -->
+                <div class="base-card">
+                    <div class="base-card-header">
+                        <i class="ph ph-phone-call"></i>
+                        <h3>Contactos de Emergencia</h3>
+                    </div>
+                    <div class="base-card-body">
+                        <ul class="base-contactos">
+                            <li><strong>Bomberos:</strong> 100 / 4664-2222</li>
+                            <li><strong>Emergencias Médicas:</strong> 107</li>
+                            <li><strong>Policía:</strong> 911</li>
+                            <li><strong>Defensa Civil:</strong> 103</li>
+                            <li><strong>Dirección del Establecimiento:</strong> 4664-1234</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Recursos adicionales -->
+                <div class="base-card">
+                    <div class="base-card-header">
+                        <i class="ph ph-book-open"></i>
+                        <h3>Guías y Recursos</h3>
+                    </div>
+                    <div class="base-card-body">
+                        <ul class="base-lista">
+                            <li>
+                                <i class="ph ph-article"></i>
+                                <div>
+                                    <strong>Guía de Seguridad Escolar</strong>
+                                    <p>Documento completo con normativas vigentes.</p>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline" title="Descargar">
+                                    <i class="ph ph-download"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <i class="ph ph-video"></i>
+                                <div>
+                                    <strong>Video instructivo de RCP</strong>
+                                    <p>Material audiovisual para capacitación.</p>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline" title="Descargar">
+                                    <i class="ph ph-download"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Zona de acciones por rol (renderizado dinámico) -->
+            <div id="accionesRol" class="acciones-rol">
+                <!-- portal.js base lo completa -->
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/escuelas_seguras_base.js"></script>
+</body>
+
+</html>

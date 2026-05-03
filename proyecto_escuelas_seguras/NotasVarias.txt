@@ -52,3 +52,31 @@ Roles de usuario:
 4.Personal/otros usuarios
        -Visualizar información relevante según su perfil.
        -Acceder a documentos y protocolos básicos.
+
+
+proyecto/
+│
+├── index.html                      # Home actual (portal público)
+│
+├── assets/
+│   ├── css/
+│   │   ├── style.css               # Estilos del portal público
+│   │   ├── login.css               # Estilos del formulario de login
+│   │   └── dashboard.css           # Estilos del dashboard interno
+│   │
+│   ├── js/
+│   │   ├── main.js                 # Lógica general del portal
+│   │   ├── auth.js                 # Manejo de login, sesión, roles
+│   │   └── dashboard.js            # Lógica del dashboard (secciones, carga docs, indicadores)
+│   │
+│   ├── img/
+│   │   └── hero-bg.png             # Imagen existente
+│   │
+│   └── uploads/                    # PDFs subidos (planos, documentos)
+│
+├── pages/
+│   ├── login.html                  # Página de autenticación
+│   └── escuelas-seguras.html       # Landing informativa + dashboard
+
+https://chat.deepseek.com/share/pn2zuhiz9i09vbz0i3
+https://chat.deepseek.com/share/4tndn2ikf9nfpatkra
