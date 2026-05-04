@@ -14,8 +14,7 @@ function obtenerUrlPlano() {
     const planoGuardado = sessionStorage.getItem("plano_evacuacion_url");
     if (planoGuardado) return planoGuardado;
     
-    // Ruta completa con el prefijo del proyecto
-    return "/jefatura-distrital/assets/uploads/plano_evacuacion.pdf";
+    return "http://localhost:5500/assets/uploads/plano_evacuacion.pdf";
 }
 
 /* ==========================================================================
