@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ESCUELAS_SEGURAS_BASE.JS - Página base de Escuelas Seguras
+   ESCUELAS_SEGURAS_BASE.JS - Página base definitiva (v2)
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {

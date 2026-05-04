@@ -97,7 +97,7 @@ function configurarVistaPrevia() {
 
     if (btnVistaPrevia) {
         btnVistaPrevia.addEventListener("click", () => {
-            window.open("escuelas_seguras_base.html", "_blank");
+            window.open("escuelas_seguras_base_2.html", "_blank");
         });
     }
 }
