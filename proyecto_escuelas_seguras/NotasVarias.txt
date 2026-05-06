@@ -53,30 +53,76 @@ Roles de usuario:
        -Visualizar información relevante según su perfil.
        -Acceder a documentos y protocolos básicos.
 
+INFORMACION A TENER EN CUENTA=======
+
+🛡️ Seguridad
+Protocolos de emergencia: planes de evacuación, simulacros, rutas de escape señalizadas.
+
+Medidas de prevención: control de accesos, cámaras de seguridad, personal de vigilancia.
+
+Normas de convivencia: reglamentos internos para prevenir violencia, acoso o bullying.
+
+Capacitación: talleres para docentes y alumnos sobre seguridad escolar.
+
+🧼 Higiene y salud
+Condiciones sanitarias: limpieza de aulas, baños, comedores y espacios comunes.
+
+Normas de higiene personal: lavado de manos, uso de sanitizantes, campañas de concientización.
+
+Alimentación segura: controles en el comedor escolar, manipulación adecuada de alimentos.
+
+Salud preventiva: controles médicos periódicos, vacunación, protocolos ante enfermedades contagiosas.
+
+📑 Transparencia y comunicación
+Documentos oficiales: reglamentos, manuales de seguridad, protocolos de higiene.
+
+Canales de contacto: teléfonos o correos para denuncias, consultas o emergencias.
+
+Informes periódicos: publicación de auditorías o inspecciones realizadas.
+
 
 proyecto/
 │
-├── index.html                      # Home actual (portal público)
+├── index.html                              # Portal público (header dinámico)
 │
 ├── assets/
 │   ├── css/
-│   │   ├── style.css               # Estilos del portal público
-│   │   ├── login.css               # Estilos del formulario de login
-│   │   └── dashboard.css           # Estilos del dashboard interno
+│   │   ├── style.css                       # Estilos base del portal
+│   │   ├── login.css                       # Estilos del formulario de login
+│   │   └── dashboard.css                   # Dashboard admin + página base
 │   │
 │   ├── js/
-│   │   ├── main.js                 # Lógica general del portal
-│   │   ├── auth.js                 # Manejo de login, sesión, roles
-│   │   └── dashboard.js            # Lógica del dashboard (secciones, carga docs, indicadores)
+│   │   ├── auth.js                         # Autenticación, sesión, roles, permisos
+│   │   ├── portal.js                       # Header dinámico del index
+│   │   ├── utils.js                        # Helpers (formatearTamanio, etc.)
+│   │   │
+│   │   ├── admin/
+│   │   │   ├── dashboard_main.js           # Sidebar, navegación, inicialización
+│   │   │   ├── seccion_inicio.js           # Resumen de contenido publicado
+│   │   │   ├── seccion_planos.js           # Upload + previsualización de planos
+│   │   │   ├── seccion_contactos.js        # CRUD de contactos de emergencia
+│   │   │   ├── seccion_protocolos.js       # CRUD de protocolos
+│   │   │   └── seccion_recursos.js         # CRUD de recursos complementarios
+│   │   │
+│   │   └── pages/
+│   │       ├── escuelas_seguras_base.js    # Lógica de la página base (roles)
+│   │       └── pdf_viewer.js               # Adobe PDF Embed API
 │   │
 │   ├── img/
-│   │   └── hero-bg.png             # Imagen existente
+│   │   └── hero-bg.png                     # Imagen del hero
 │   │
-│   └── uploads/                    # PDFs subidos (planos, documentos)
+│   └── uploads/
+│       └── plano_evacuacion.pdf            # PDF del plano (demo)
 │
 ├── pages/
-│   ├── login.html                  # Página de autenticación
-│   └── escuelas-seguras.html       # Landing informativa + dashboard
-
+│   ├── login.html                          # Formulario de acceso
+│   ├── escuelas_seguras.html               # Dashboard admin
+│   ├── escuelas_seguras_base.html          # Página base (v1 - original)
+│   └── escuelas_seguras_base_2.html        # Página base (v2 - definitiva)
+│
+└── (futuro) backend/
+    ├── api/
+    ├── base_de_datos/
+    └── ...
 https://chat.deepseek.com/share/pn2zuhiz9i09vbz0i3
 https://chat.deepseek.com/share/4tndn2ikf9nfpatkra
