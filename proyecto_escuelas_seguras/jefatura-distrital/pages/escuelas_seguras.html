@@ -43,27 +43,23 @@
 
         <section id="vistaDashboard" class="dashboard-view">
 
-            <!-- Sidebar -->
             <aside class="sidebar">
                 <nav class="sidebar-nav">
-                    <span class="sidebar-label">Menú Admin</span>
+                    <span class="sidebar-label">Contenido Público</span>
                     <button class="sidebar-btn active" data-seccion="inicio">
                         <i class="ph ph-house"></i> Inicio
                     </button>
-                    <button class="sidebar-btn" data-seccion="documentos">
-                        <i class="ph ph-file-text"></i> Documentos
-                    </button>
-                    <button class="sidebar-btn" data-seccion="checklist">
-                        <i class="ph ph-clipboard-text"></i> Checklist
-                    </button>
-                    <button class="sidebar-btn" data-seccion="incidentes">
-                        <i class="ph ph-warning-circle"></i> Incidentes
-                    </button>
-                    <button class="sidebar-btn" data-seccion="indicadores">
-                        <i class="ph ph-chart-bar"></i> Indicadores
-                    </button>
                     <button class="sidebar-btn" data-seccion="planos">
                         <i class="ph ph-map-pin"></i> Planos
+                    </button>
+                    <button class="sidebar-btn" data-seccion="contactos">
+                        <i class="ph ph-phone-call"></i> Contactos
+                    </button>
+                    <button class="sidebar-btn" data-seccion="protocolos">
+                        <i class="ph ph-clipboard-text"></i> Protocolos
+                    </button>
+                    <button class="sidebar-btn" data-seccion="recursos">
+                        <i class="ph ph-book-open"></i> Recursos
                     </button>
                     <span class="sidebar-label" style="margin-top: 1rem;">Acciones</span>
                     <button class="sidebar-btn" id="btnVistaPrevia">
@@ -72,14 +68,12 @@
                 </nav>
             </aside>
 
-            <!-- Contenido dinámico -->
             <div class="dashboard-content" id="contenidoSeccion">
                 <!-- Renderizado por JS -->
             </div>
 
         </section>
 
-        <!-- Acceso denegado -->
         <section id="vistaDenegada" class="acceso-denegado hidden">
             <i class="ph ph-lock-key"></i>
             <h2>Acceso denegado</h2>
@@ -90,7 +84,13 @@
     </main>
 
     <script src="../assets/js/auth.js"></script>
-    <script src="../assets/js/escuelas_seguras.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/admin/seccion_inicio.js"></script>
+    <script src="../assets/js/admin/seccion_planos.js"></script>
+    <script src="../assets/js/admin/seccion_contactos.js"></script>
+    <script src="../assets/js/admin/seccion_protocolos.js"></script>
+    <script src="../assets/js/admin/seccion_recursos.js"></script>
+    <script src="../assets/js/admin/dashboard_main.js"></script>
 </body>
 
 </html>

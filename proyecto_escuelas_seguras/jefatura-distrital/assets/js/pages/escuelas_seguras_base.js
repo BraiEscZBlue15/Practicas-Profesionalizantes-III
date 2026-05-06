@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
 function inicializarPaginaBase(sesion) {
     mostrarNombreUsuario(sesion);
     configurarLogout();
+    renderizarContactos();
+    renderizarProtocolos();
+    renderizarRecursos();
+    renderizarProtocolosCards();
     renderizarAccionesPorRol(sesion);
 }
 
@@ -40,6 +44,143 @@ function configurarLogout() {
     if (btnLogout) {
         btnLogout.addEventListener("click", cerrarSesion);
     }
+}
+
+/* ==========================================================================
+   RENDERIZADO DE CONTACTOS
+   ========================================================================== */
+
+function renderizarContactos() {
+    const contenedor = document.getElementById("lista-contactos");
+    if (!contenedor) return;
+
+    const contactos = obtenerDeStorage("contactos_emergencia") || [];
+    const iconos = {
+        "Bomberos": "ph-fire-extinguisher",
+        "Emergencias Médicas": "ph-first-aid",
+        "Policía": "ph-shield",
+        "Defensa Civil": "ph-building",
+        "Dirección del Establecimiento": "ph-user-circle"
+    };
+
+    contenedor.innerHTML = contactos.map(c => `
+        <li>
+            <span class="contacto-icon">
+                <i class="ph ${iconos[c.nombre] || 'ph-phone'}"></i>
+            </span>
+            <div>
+                <strong>${c.nombre}</strong>
+                <span class="contacto-numero">${c.numero}</span>
+            </div>
+        </li>
+    `).join("");
+}
+
+/* ==========================================================================
+   RENDERIZADO DE PROTOCOLOS (LISTA)
+   ========================================================================== */
+
+function renderizarProtocolos() {
+    const contenedor = document.getElementById("lista-protocolos");
+    if (!contenedor) return;
+
+    const protocolos = obtenerDeStorage("protocolos") || [];
+    const iconos = [
+        "ph-fire-extinguisher",
+        "ph-first-aid",
+        "ph-warning",
+        "ph-gas-cylinder",
+        "ph-lightning"
+    ];
+
+    contenedor.innerHTML = protocolos.map((p, i) => `
+        <div class="protocolo-item">
+            <div class="protocolo-icono">
+                <i class="ph ${iconos[i] || 'ph-file-text'}"></i>
+            </div>
+            <div class="protocolo-info">
+                <h4>${p.titulo}</h4>
+                <p>${p.descripcion}</p>
+            </div>
+            ${p.archivo_url ? `
+                <a href="${p.archivo_url}" class="btn btn-primary btn-sm btn-descarga" download>
+                    <i class="ph ph-download"></i> Descargar PDF
+                </a>
+            ` : `
+                <span style="color: var(--text-light); font-size: 0.85rem;">Sin archivo</span>
+            `}
+        </div>
+    `).join("");
+}
+
+/* ==========================================================================
+   RENDERIZADO DE PROTOCOLOS (TARJETAS)
+   ========================================================================== */
+
+function renderizarProtocolosCards() {
+    const contenedor = document.getElementById("grid-protocolos");
+    if (!contenedor) return;
+
+    const protocolos = obtenerDeStorage("protocolos") || [];
+    const iconos = [
+        "ph-fire-extinguisher",
+        "ph-first-aid",
+        "ph-warning",
+        "ph-gas-cylinder",
+        "ph-lightning"
+    ];
+
+    contenedor.innerHTML = protocolos.map((p, i) => `
+        <div class="protocolo-card">
+            <div class="protocolo-card-icono">
+                <i class="ph ${iconos[i] || 'ph-file-text'}"></i>
+            </div>
+            <h4>${p.titulo}</h4>
+            <p>${p.descripcion.substring(0, 120)}${p.descripcion.length > 120 ? '...' : ''}</p>
+            ${p.archivo_url ? `
+                <a href="${p.archivo_url}" class="btn btn-primary btn-sm btn-full" download>
+                    <i class="ph ph-download"></i> Descargar PDF
+                </a>
+            ` : `
+                <span style="color: var(--text-light); font-size: 0.85rem; text-align: center;">Sin archivo</span>
+            `}
+        </div>
+    `).join("");
+}
+
+/* ==========================================================================
+   RENDERIZADO DE RECURSOS
+   ========================================================================== */
+
+function renderizarRecursos() {
+    const contenedor = document.getElementById("lista-recursos");
+    if (!contenedor) return;
+
+    const recursos = obtenerDeStorage("recursos") || [];
+    const iconos = [
+        "ph-article",
+        "ph-video",
+        "ph-calendar-check"
+    ];
+
+    contenedor.innerHTML = recursos.map((r, i) => `
+        <div class="protocolo-item">
+            <div class="protocolo-icono">
+                <i class="ph ${iconos[i] || 'ph-file-text'}"></i>
+            </div>
+            <div class="protocolo-info">
+                <h4>${r.titulo}</h4>
+                <p>${r.descripcion}</p>
+            </div>
+            ${r.archivo_url ? `
+                <a href="${r.archivo_url}" class="btn btn-primary btn-sm btn-descarga" download>
+                    <i class="ph ph-download"></i> Descargar
+                </a>
+            ` : `
+                <span style="color: var(--text-light); font-size: 0.85rem;">Sin archivo</span>
+            `}
+        </div>
+    `).join("");
 }
 
 /* ==========================================================================
