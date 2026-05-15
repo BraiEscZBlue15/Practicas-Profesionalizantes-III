@@ -489,6 +489,38 @@
     .resumen-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .emergencia-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .protocolo-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-descarga {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .modulo-emergencia {
+        padding: 1.5rem 0;
+    }
+
+    .modulo-emergencia-header h2 {
+        font-size: 1.35rem;
+    }
+
+    .visor-plano-admin,
+    .visor-plano-vacio {
+        height: 300px;
+        width: 100% !important;
+    }
+
+    .dashboard-content .upload-area {
+        padding: 1.25rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -502,6 +534,10 @@
 
     .user-display {
         display: none;
+    }
+        .visor-plano-admin,
+    .visor-plano-vacio {
+        height: 200px;
     }
 }
 
@@ -909,33 +945,7 @@
     flex-shrink: 0;
 }
 
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
 
-@media (max-width: 768px) {
-    .emergencia-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .protocolo-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .btn-descarga {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .modulo-emergencia {
-        padding: 1.5rem 0;
-    }
-
-    .modulo-emergencia-header h2 {
-        font-size: 1.35rem;
-    }
-}
 
 /* ==========================================================================
    MÓDULO PROTOCOLOS EN TARJETAS (ALTERNATIVO)
@@ -1007,4 +1017,59 @@
     .cards-grid {
         grid-template-columns: 1fr;
     }
+}
+/* ==========================================================================
+   ANCHO UNIFORME EN SECCIONES
+   ========================================================================== */
+
+.resumen-grid {
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+}
+
+.dashboard-content .form-interno {
+    max-width: 100%;
+    width: 100%;
+}
+
+.visor-plano-admin {
+    height: 500px;
+    width: 800px;
+}
+
+.visor-plano-vacio {
+    height: 200px;
+    width: 100%;
+}
+
+.dashboard-content .upload-area {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.plano-cargado-msg {
+    margin-top: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.plano-cargado-msg i {
+    color: #16A34A;
+}
+/* Tabla de contactos: ancho completo */
+.tabla-contactos {
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* Tabla de novedades */
+.tabla-novedades {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.form-select-sm {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.8rem;
+    width: 100%;
 }

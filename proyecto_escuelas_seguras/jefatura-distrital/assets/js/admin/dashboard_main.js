@@ -177,5 +177,9 @@ function cargarSeccion(seccion) {
             break;
         default:
             contenedor.innerHTML = renderizarInicio();
+        case "novedades":
+            contenedor.innerHTML = renderizarNovedades();
+            configurarEventosNovedades();
+            break;
     }
 }

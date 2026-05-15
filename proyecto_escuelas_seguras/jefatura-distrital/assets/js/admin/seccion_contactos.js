@@ -45,12 +45,12 @@ function renderizarContactos() {
             </div>
         </div>
         <div class="tabla-contenedor">
-            <table class="tabla">
+            <table class="tabla tabla-contactos">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Número</th>
-                        <th>Acciones</th>
+                        <th style="width: 40%;">Nombre</th>
+                        <th style="width: 40%;">Número</th>
+                        <th style="width: 20%;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
