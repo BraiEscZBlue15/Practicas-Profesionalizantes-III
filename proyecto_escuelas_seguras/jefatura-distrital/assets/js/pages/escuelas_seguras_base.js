@@ -336,6 +336,7 @@ function configurarEventosRol(rol) {
             break;
         case "personal":
             configurarFormularioIncidenteBase();
+            configurarBotonFlotante();
             break;
     }
 }
@@ -397,4 +398,75 @@ function configurarFormularioIncidenteBase() {
             document.getElementById("fechaIncidenteBase").value = "";
         });
     }
+}
+
+/* ==========================================================================
+   BOTÓN FLOTANTE Y MODAL DE NOVEDADES (PERSONAL)
+   ========================================================================== */
+
+function configurarBotonFlotante() {
+    const btnFlotante = document.getElementById("btnReportarNovedad");
+    const modal = document.getElementById("modalNovedad");
+    const btnCerrar = document.getElementById("btnCerrarModal");
+    const btnGuardar = document.getElementById("btnGuardarNovedad");
+
+    if (!btnFlotante || !modal) return;
+
+    btnFlotante.classList.remove("hidden");
+
+    btnFlotante.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+    });
+
+    if (btnCerrar) {
+        btnCerrar.addEventListener("click", () => {
+            modal.classList.add("hidden");
+        });
+    }
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.add("hidden");
+        }
+    });
+
+    if (btnGuardar) {
+        btnGuardar.addEventListener("click", guardarNovedad);
+    }
+}
+
+function guardarNovedad() {
+    const sector = document.getElementById("novedadSector").value;
+    const tipo = document.getElementById("novedadTipo").value;
+    const prioridad = document.getElementById("novedadPrioridad").value;
+    const descripcion = document.getElementById("novedadDescripcion").value.trim();
+
+    if (!sector || !tipo || !prioridad || !descripcion) {
+        alert("Completá todos los campos.");
+        return;
+    }
+
+    const novedades = obtenerDeStorage("novedades") || [];
+
+    novedades.push({
+        id: generarId(),
+        fecha: new Date().toISOString().split("T")[0],
+        sector,
+        tipo,
+        prioridad,
+        descripcion,
+        estado: "Pendiente",
+        reportadoPor: obtenerSesion()?.nombre || "Personal"
+    });
+
+    guardarEnStorage("novedades", novedades);
+
+    document.getElementById("novedadSector").value = "";
+    document.getElementById("novedadTipo").value = "";
+    document.getElementById("novedadPrioridad").value = "";
+    document.getElementById("novedadDescripcion").value = "";
+
+    document.getElementById("modalNovedad").classList.add("hidden");
+
+    alert("Novedad reportada correctamente.");
 }

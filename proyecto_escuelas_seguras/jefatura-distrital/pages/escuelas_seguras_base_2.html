@@ -136,6 +136,73 @@
         <div id="accionesRol" class="acciones-rol container">
             <!-- Se completa dinámicamente -->
         </div>
+        <!-- Botón flotante para personal -->
+<button id="btnReportarNovedad" class="btn-flotante hidden" title="Reportar novedad">
+    <i class="ph ph-warning-circle"></i>
+    <span>Reportar novedad</span>
+</button>
+
+<!-- Modal para reportar novedad -->
+<div id="modalNovedad" class="modal-overlay hidden">
+    <div class="modal-contenido">
+        <div class="modal-header">
+            <h3><i class="ph ph-warning-circle"></i> Reportar Novedad</h3>
+            <button id="btnCerrarModal" class="btn-icon" title="Cerrar">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="form-label">Sector</label>
+                <select id="novedadSector" class="form-input">
+                    <option value="">Seleccioná un sector...</option>
+                    <option value="Planta baja">Planta baja</option>
+                    <option value="Primer piso">Primer piso</option>
+                    <option value="Segundo piso">Segundo piso</option>
+                    <option value="SUM">SUM</option>
+                    <option value="Patio">Patio</option>
+                    <option value="Gimnasio">Gimnasio</option>
+                    <option value="Baños">Baños</option>
+                    <option value="Cocina">Cocina</option>
+                    <option value="Entrada">Entrada</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="form-fila">
+                <div class="form-group">
+                    <label class="form-label">Tipo</label>
+                    <select id="novedadTipo" class="form-input">
+                        <option value="">Seleccionar...</option>
+                        <option value="Infraestructura">Infraestructura</option>
+                        <option value="Incendio">Incendio</option>
+                        <option value="Limpieza">Limpieza</option>
+                        <option value="Eléctrico">Eléctrico</option>
+                        <option value="Gas">Gas</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Prioridad</label>
+                    <select id="novedadPrioridad" class="form-input">
+                        <option value="">Seleccionar...</option>
+                        <option value="Alta">Alta</option>
+                        <option value="Media">Media</option>
+                        <option value="Baja">Baja</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Descripción</label>
+                <textarea id="novedadDescripcion" class="form-input" placeholder="Describí la novedad en detalle..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="btnGuardarNovedad" class="btn btn-primary btn-full">
+                    <i class="ph ph-check"></i> Guardar reporte
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
     </main>
 
