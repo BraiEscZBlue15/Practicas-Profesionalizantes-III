@@ -27,6 +27,7 @@ function inicializarPaginaBase(sesion) {
     configurarLogout();
     renderizarContactos();
     renderizarProtocolos();
+    configurarPrevisualizarProtocolos();
     renderizarRecursos();
     renderizarProtocolosCards();
     renderizarAccionesPorRol(sesion);
@@ -103,12 +104,17 @@ function renderizarProtocolos() {
                 <p>${p.descripcion}</p>
             </div>
             ${p.archivo_url ? `
-                <a href="${p.archivo_url}" class="btn btn-primary btn-sm btn-descarga" download>
-                    <i class="ph ph-download"></i> Descargar PDF
+            <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
+                <button class="btn btn-outline btn-sm btn-previsualizar" data-url="${p.archivo_url}" data-titulo="${p.titulo}">
+                    <i class="ph ph-eye"></i> Previsualizar
+                </button>
+                <a href="${p.archivo_url}" class="btn btn-primary btn-sm" download>
+                    <i class="ph ph-download"></i> Descargar
                 </a>
-            ` : `
-                <span style="color: var(--text-light); font-size: 0.85rem;">Sin archivo</span>
-            `}
+            </div>
+        ` : `
+            <span style="color: var(--text-light); font-size: 0.85rem;">Sin archivo</span>
+        `}
         </div>
     `).join("");
 }
@@ -157,32 +163,59 @@ function renderizarRecursos() {
     if (!contenedor) return;
 
     const recursos = obtenerDeStorage("recursos") || [];
-    const iconos = [
-        "ph-article",
-        "ph-video",
-        "ph-calendar-check"
-    ];
+    const iconos = {
+        "PDF": "ph-file-pdf",
+        "Video": "ph-video",
+        "Archivo": "ph-file-text"
+    };
 
-    contenedor.innerHTML = recursos.map((r, i) => `
-        <div class="protocolo-item">
-            <div class="protocolo-icono">
-                <i class="ph ${iconos[i] || 'ph-file-text'}"></i>
+    contenedor.innerHTML = recursos.map((r) => {
+        const esVideo = r.tipo === "Video" && r.archivo_url;
+        
+        return `
+            <div class="protocolo-item">
+                <div class="protocolo-icono">
+                    <i class="ph ${iconos[r.tipo] || 'ph-file-text'}"></i>
+                </div>
+                <div class="protocolo-info">
+                    <h4>${r.titulo}</h4>
+                    <p>${r.descripcion}</p>
+                    ${esVideo ? `
+                        <div class="video-wrapper" style="margin-top: 0.75rem;">
+                            <iframe src="${obtenerUrlEmbebida(r.archivo_url)}" 
+                                style="width: 100%; height: 400px; border: none; border-radius: var(--radius-sm);" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    ` : ''}
+                </div>
+                ${r.archivo_url ? `
+                    <a href="${r.archivo_url}" class="btn btn-primary btn-sm btn-descarga" ${esVideo ? 'target="_blank"' : 'download'}>
+                        <i class="ph ${esVideo ? 'ph-play' : 'ph-download'}"></i> ${esVideo ? 'Ver video' : 'Descargar'}
+                    </a>
+                ` : `
+                    <span style="color: var(--text-light); font-size: 0.85rem;">Sin archivo</span>
+                `}
             </div>
-            <div class="protocolo-info">
-                <h4>${r.titulo}</h4>
-                <p>${r.descripcion}</p>
-            </div>
-            ${r.archivo_url ? `
-                <a href="${r.archivo_url}" class="btn btn-primary btn-sm btn-descarga" download>
-                    <i class="ph ph-download"></i> Descargar
-                </a>
-            ` : `
-                <span style="color: var(--text-light); font-size: 0.85rem;">Sin archivo</span>
-            `}
-        </div>
-    `).join("");
+        `;
+    }).join("");
 }
 
+function obtenerUrlEmbebida(url) {
+    if (url.includes("youtube.com/watch?v=")) {
+        const videoId = url.split("v=")[1]?.split("&")[0];
+        return `https://www.youtube.com/embed/${videoId}`;
+    }
+    if (url.includes("youtu.be/")) {
+        const videoId = url.split("youtu.be/")[1]?.split("?")[0];
+        return `https://www.youtube.com/embed/${videoId}`;
+    }
+    if (url.includes("vimeo.com/")) {
+        const videoId = url.split("vimeo.com/")[1];
+        return `https://player.vimeo.com/video/${videoId}`;
+    }
+    return url;
+}
 /* ==========================================================================
    ACCIONES POR ROL
    ========================================================================== */
@@ -469,4 +502,56 @@ function guardarNovedad() {
     document.getElementById("modalNovedad").classList.add("hidden");
 
     alert("Novedad reportada correctamente.");
+}
+
+/* ==========================================================================
+   PREVISUALIZAR PDF DE PROTOCOLOS
+   ========================================================================== */
+
+function configurarPrevisualizarProtocolos() {
+    document.querySelectorAll(".btn-previsualizar").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const url = btn.dataset.url;
+            const titulo = btn.dataset.titulo;
+            abrirPrevisualizar(url, titulo);
+        });
+    });
+
+    document.getElementById("btnCerrarPrevisualizar").addEventListener("click", () => {
+        document.getElementById("modalPrevisualizar").classList.add("hidden");
+    });
+
+    document.getElementById("modalPrevisualizar").addEventListener("click", (e) => {
+        if (e.target === document.getElementById("modalPrevisualizar")) {
+            document.getElementById("modalPrevisualizar").classList.add("hidden");
+        }
+    });
+}
+
+function abrirPrevisualizar(url, titulo) {
+    document.getElementById("modalPrevisualizarTitulo").innerHTML = `<i class="ph ph-file-pdf"></i> ${titulo}`;
+    document.getElementById("btnDescargarPrevisualizar").href = url;
+    document.getElementById("modalPrevisualizar").classList.remove("hidden");
+
+    const visor = document.getElementById("visor-previsualizar");
+    
+    if (window.AdobeDC) {
+        const adobeDCView = new AdobeDC.View({
+            clientId: "572d1f01286b4e2fa9aa2091885d5a58",
+            divId: "visor-previsualizar"
+        });
+        adobeDCView.previewFile({
+            content: { location: { url: url } },
+            metaData: { fileName: titulo, hasDownload: false }
+        }, {
+            embedMode: "SIZED_CONTAINER",
+            defaultViewMode: "FIT_WIDTH",
+            showAnnotationTools: false,
+            showPrintPDF: false,
+            showDownloadPDF: false,
+            showZoomControl: true
+        });
+    } else {
+        visor.innerHTML = `<iframe src="${url}" style="width: 100%; height: 100%; border: none;"></iframe>`;
+    }
 }

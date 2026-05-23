@@ -203,6 +203,26 @@
         </div>
     </div>
 </div>
+<!-- Modal para previsualizar PDF de protocolos -->
+<div id="modalPrevisualizar" class="modal-overlay hidden">
+    <div class="modal-contenido modal-previsualizar">
+        <div class="modal-header">
+            <h3 id="modalPrevisualizarTitulo"><i class="ph ph-file-pdf"></i> Previsualizar PDF</h3>
+            <button id="btnCerrarPrevisualizar" class="btn-icon" title="Cerrar">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div id="visor-previsualizar" style="height: 500px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--gray-200);"></div>
+            <div style="margin-top: 1rem; text-align: right;">
+                <a id="btnDescargarPrevisualizar" href="#" class="btn btn-primary btn-sm" target="_blank">
+                    <i class="ph ph-download"></i> Descargar PDF
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     </main>
 
