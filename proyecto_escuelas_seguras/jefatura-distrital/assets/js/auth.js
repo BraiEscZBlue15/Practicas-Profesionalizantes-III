@@ -204,7 +204,7 @@ function verificarSesion() {
 
     const paginasProtegidas = [
         "escuelas_seguras.html",
-        "escuelas_seguras_base.html",
+        "escuelas_seguras_base_2.html",
         "dashboard.html"
     ];
 
@@ -261,7 +261,7 @@ function redirigirPorRol(rol) {
             window.location.href = "escuelas_seguras.html";
             break;
         default:
-            window.location.href = "escuelas_seguras_base.html";
+            window.location.href = "escuelas_seguras_base_2.html";
             break;
     }
 }
