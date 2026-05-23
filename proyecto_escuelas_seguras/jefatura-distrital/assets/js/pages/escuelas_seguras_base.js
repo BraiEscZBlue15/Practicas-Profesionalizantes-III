@@ -301,44 +301,7 @@ function renderizarAccionesEstudiante() {
 }
 
 function renderizarAccionesPersonal() {
-    return `
-        <div class="base-card">
-            <div class="base-card-header">
-                <i class="ph ph-warning-circle"></i>
-                <h3>Registro de Incidentes</h3>
-            </div>
-            <div class="base-card-body">
-                <p>Reportá cualquier incidente relacionado con seguridad o infraestructura.</p>
-                <button class="btn btn-primary" id="btnNuevoIncidenteBase">
-                    <i class="ph ph-plus"></i> Registrar incidente
-                </button>
-                <div id="formIncidenteBase" class="form-interno hidden" style="margin-top: 1rem;">
-                    <div class="form-group">
-                        <label class="form-label">Tipo de incidente</label>
-                        <input type="text" id="tipoIncidenteBase" class="form-input" placeholder="Ej: Caída, rotura, etc.">
-                    </div>
-                    <div class="form-fila" style="margin-top: 1rem;">
-                        <div class="form-group">
-                            <label class="form-label">Gravedad</label>
-                            <select id="gravedadIncidenteBase" class="form-input" style="padding-left: 0.75rem;">
-                                <option value="Leve">Leve</option>
-                                <option value="Moderada">Moderada</option>
-                                <option value="Alta">Alta</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Fecha</label>
-                            <input type="date" id="fechaIncidenteBase" class="form-input" style="padding-left: 0.75rem;">
-                        </div>
-                    </div>
-                    <div class="form-acciones">
-                        <button class="btn btn-primary btn-sm" id="btnGuardarIncidenteBase">Guardar</button>
-                        <button class="btn btn-outline btn-sm" id="btnCancelarIncidenteBase">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
+    return ``;
 }
 
 function renderizarAccionesAdmin() {
@@ -368,7 +331,6 @@ function configurarEventosRol(rol) {
             configurarUploadProfesor();
             break;
         case "personal":
-            configurarFormularioIncidenteBase();
             configurarBotonFlotante();
             break;
     }

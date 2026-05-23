@@ -203,9 +203,9 @@ function verificarSesion() {
     }
 
     const paginasProtegidas = [
-        "escuelas_seguras.html",
-        "escuelas_seguras_base_2.html",
-        "dashboard.html"
+    "escuelas_seguras.html",
+    "escuelas_seguras_base_2.html",
+    "dashboard.html"
     ];
 
     if (!sesion && paginasProtegidas.some(p => path.includes(p))) {
