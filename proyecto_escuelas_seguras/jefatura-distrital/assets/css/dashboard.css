@@ -1222,4 +1222,27 @@
 .modal-previsualizar {
     max-width: 800px;
 }
-/* Video embebido en recursos */
+/* Botón flotante para admin */
+.btn-flotante-dashboard {
+    right: auto;
+    left: 2rem;
+    background-color: #0A3771;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-flotante-dashboard:hover {
+    background-color: #072a5a;
+    color: white;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    .btn-flotante-dashboard {
+        left: 1rem;
+    }
+
+    .btn-flotante-dashboard span {
+        display: none;
+    }
+}

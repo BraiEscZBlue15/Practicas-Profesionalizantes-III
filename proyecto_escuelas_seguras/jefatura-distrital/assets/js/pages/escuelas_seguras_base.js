@@ -29,6 +29,7 @@ function inicializarPaginaBase(sesion) {
     renderizarProtocolos();
     configurarPrevisualizarProtocolos();
     renderizarRecursos();
+    configurarPrevisualizarRecursos();
     renderizarProtocolosCards();
     renderizarAccionesPorRol(sesion);
 }
@@ -190,9 +191,16 @@ function renderizarRecursos() {
                     ` : ''}
                 </div>
                 ${r.archivo_url ? `
-                    <a href="${r.archivo_url}" class="btn btn-primary btn-sm btn-descarga" ${esVideo ? 'target="_blank"' : 'download'}>
-                        <i class="ph ${esVideo ? 'ph-play' : 'ph-download'}"></i> ${esVideo ? 'Ver video' : 'Descargar'}
-                    </a>
+                    <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
+                        ${r.tipo === 'PDF' ? `
+                            <button class="btn btn-outline btn-sm btn-previsualizar-recurso" data-url="${r.archivo_url}" data-titulo="${r.titulo}">
+                                <i class="ph ph-eye"></i> Previsualizar
+                            </button>
+                        ` : ''}
+                        <a href="${r.archivo_url}" class="btn btn-primary btn-sm" ${r.tipo === 'Video' ? 'target="_blank"' : 'download'}>
+                            <i class="ph ${r.tipo === 'Video' ? 'ph-play' : 'ph-download'}"></i> ${r.tipo === 'Video' ? 'Ver video' : 'Descargar'}
+                        </a>
+                    </div>
                 ` : `
                     <span style="color: var(--text-light); font-size: 0.85rem;">Sin archivo</span>
                 `}
@@ -237,7 +245,7 @@ function renderizarAccionesPorRol(sesion) {
             html = renderizarAccionesPersonal();
             break;
         case "admin":
-            html = renderizarAccionesAdmin();
+            html = "";
             break;
     }
 
@@ -332,6 +340,9 @@ function configurarEventosRol(rol) {
             break;
         case "personal":
             configurarBotonFlotante();
+            break;
+        case "admin":
+            configurarBotonDashboard();
             break;
     }
 }
@@ -490,6 +501,20 @@ function configurarPrevisualizarProtocolos() {
     });
 }
 
+/* ==========================================================================
+   PREVISUALIZAR PDF DE RECURSOS
+   ========================================================================== */
+
+function configurarPrevisualizarRecursos() {
+    document.querySelectorAll(".btn-previsualizar-recurso").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const url = btn.dataset.url;
+            const titulo = btn.dataset.titulo;
+            abrirPrevisualizar(url, titulo);
+        });
+    });
+}
+
 function abrirPrevisualizar(url, titulo) {
     document.getElementById("modalPrevisualizarTitulo").innerHTML = `<i class="ph ph-file-pdf"></i> ${titulo}`;
     document.getElementById("btnDescargarPrevisualizar").href = url;
@@ -515,5 +540,16 @@ function abrirPrevisualizar(url, titulo) {
         });
     } else {
         visor.innerHTML = `<iframe src="${url}" style="width: 100%; height: 100%; border: none;"></iframe>`;
+    }
+}
+
+/* ==========================================================================
+   BOTÓN FLOTANTE DASHBOARD (ADMIN)
+   ========================================================================== */
+
+function configurarBotonDashboard() {
+    const btnDashboard = document.getElementById("btnIrDashboard");
+    if (btnDashboard) {
+        btnDashboard.classList.remove("hidden");
     }
 }
