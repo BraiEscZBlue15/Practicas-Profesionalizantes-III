@@ -7,6 +7,7 @@ function renderizarInicio() {
     const recursos = obtenerDeStorage("recursos") || [];
     const contactos = obtenerDeStorage("contactos_emergencia") || [];
     const planoUrl = obtenerDeStorage("plano_evacuacion_url");
+    const pendientes = obtenerDeStorage("solicitudes_pendientes") || [];
 
     return `
         <div class="seccion-header">
@@ -33,6 +34,11 @@ function renderizarInicio() {
                 <i class="ph ph-phone-call"></i>
                 <div class="resumen-valor">${contactos.length}</div>
                 <div class="resumen-label">Contactos de emergencia</div>
+            </div>
+            <div class="resumen-card">
+                <i class="ph ph-user-list"></i>
+                <div class="resumen-valor">${pendientes.length}</div>
+                <div class="resumen-label">Solicitudes pendientes</div>
             </div>
         </div>
     `;

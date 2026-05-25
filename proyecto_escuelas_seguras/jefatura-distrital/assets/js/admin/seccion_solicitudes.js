@@ -28,8 +28,8 @@ function renderizarSolicitudes() {
             <h2>Solicitudes de Acceso</h2>
             <p>Usuarios que solicitaron registrarse en la plataforma</p>
         </div>
-        <div class="tabla-contenedor">
-            <table class="tabla">
+        <div class="tabla-contenedor" style="min-height: 300px;">
+            <table class="tabla tabla-solicitudes">
                 <thead>
                     <tr>
                         <th>Fecha</th>

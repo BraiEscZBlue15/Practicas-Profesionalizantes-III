@@ -1246,3 +1246,13 @@
         display: none;
     }
 }
+
+/* Tabla de solicitudes */
+.tabla-solicitudes {
+    width: 100%;
+    min-width: 950px;
+    table-layout: fixed;
+}
+.seccion-solicitudes .tabla-contenedor {
+    min-height: 300px;
+}
