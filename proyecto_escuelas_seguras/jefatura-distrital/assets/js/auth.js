@@ -117,9 +117,30 @@ function manejarLogin(event) {
         return;
     }
 
-    const usuarioEncontrado = USUARIOS.find(
+        // Buscar en usuarios fijos
+    let usuarioEncontrado = USUARIOS.find(
         u => u.usuario === usuarioInput && u.password === passwordInput
     );
+
+    // Si no, buscar en aprobados
+    if (!usuarioEncontrado) {
+        const aprobados = obtenerDeStorage("usuarios_aprobados") || [];
+        usuarioEncontrado = aprobados.find(
+            u => u.usuario === usuarioInput && u.password === passwordInput
+        );
+    }
+
+    // Si no, buscar si está pendiente
+    if (!usuarioEncontrado) {
+        const pendientes = obtenerDeStorage("solicitudes_pendientes") || [];
+        const pendiente = pendientes.find(
+            u => u.usuario === usuarioInput && u.password === passwordInput
+        );
+        if (pendiente) {
+            mostrarError(errorDiv, "Tu solicitud aún está pendiente de aprobación.");
+            return;
+        }
+    }
 
     if (!usuarioEncontrado) {
         mostrarError(errorDiv, "Usuario o contraseña incorrectos.");

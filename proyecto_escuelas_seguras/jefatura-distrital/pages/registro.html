@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | Jefatura Distrital San Miguel</title>
+    <meta name="description" content="Solicitud de acceso a la plataforma.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="login-page">
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="../index.html" class="logo">
+                <i class="ph ph-bank logo-icon"></i>
+                <span class="logo-text">Jefatura Distrital San Miguel</span>
+            </a>
+            <nav class="nav" aria-label="Navegación principal">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="#" class="nav-link">Documentos</a></li>
+                    <li><a href="#" class="nav-link">Instituciones</a></li>
+                    <li><a href="#" class="nav-link">Recursos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="login-main">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="login-icon">
+                    <i class="ph ph-user-plus"></i>
+                </div>
+                <h1 class="login-title">Solicitud de Acceso</h1>
+                <p class="login-subtitle">Completá tus datos. El administrador revisará tu solicitud.</p>
+            </div>
+
+            <form id="registroForm" class="login-form" novalidate>
+                <div class="form-group">
+                    <label for="regNombre" class="form-label">Nombre completo</label>
+                    <div class="input-wrapper">
+                        <i class="ph ph-user input-icon"></i>
+                        <input type="text" id="regNombre" name="regNombre" class="form-input" placeholder="Juan Pérez" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="regUsuario" class="form-label">Email</label>
+                    <div class="input-wrapper">
+                        <i class="ph ph-envelope input-icon"></i>
+                        <input type="email" id="regUsuario" name="regUsuario" class="form-input" placeholder="correo@ejemplo.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword" class="form-label">Contraseña</label>
+                    <div class="input-wrapper">
+                        <i class="ph ph-lock input-icon"></i>
+                        <input type="password" id="regPassword" name="regPassword" class="form-input" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="regRol" class="form-label">Rol</label>
+                    <div class="input-wrapper">
+                        <i class="ph ph-graduation-cap input-icon"></i>
+                        <select id="regRol" name="regRol" class="form-input" style="padding-left: 2.75rem;" required>
+                            <option value="">Seleccioná tu rol...</option>
+                            <option value="profesor">Profesor</option>
+                            <option value="estudiante">Estudiante</option>
+                            <option value="personal">Personal</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="registroError" class="login-error hidden"></div>
+                <div id="registroExito" class="login-error hidden" style="background-color: #DCFCE7; color: #166534; border-color: #BBF7D0;"></div>
+
+                <button type="submit" class="btn btn-primary btn-full login-btn">
+                    Enviar solicitud <i class="ph ph-paper-plane-tilt"></i>
+                </button>
+            </form>
+
+            <p class="login-footer-text">
+                ¿Ya tenés una cuenta? <a href="login.html" style="color: var(--color-primary); font-weight: 500;">Iniciá sesión</a>
+            </p>
+        </div>
+    </main>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/registro.js"></script>
+</body>
+
+</html>

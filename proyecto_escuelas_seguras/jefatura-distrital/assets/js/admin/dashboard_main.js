@@ -154,7 +154,6 @@ function configurarVistaPrevia() {
 function cargarSeccion(seccion) {
     const contenedor = document.getElementById("contenidoSeccion");
     if (!contenedor) return;
-
     switch (seccion) {
         case "inicio":
             contenedor.innerHTML = renderizarInicio();
@@ -175,11 +174,15 @@ function cargarSeccion(seccion) {
             contenedor.innerHTML = renderizarRecursos();
             configurarEventosRecursos();
             break;
-        default:
-            contenedor.innerHTML = renderizarInicio();
         case "novedades":
             contenedor.innerHTML = renderizarNovedades();
             configurarEventosNovedades();
             break;
+        case "solicitudes":
+            contenedor.innerHTML = renderizarSolicitudes();
+            configurarEventosSolicitudes();
+            break;
+        default:
+            contenedor.innerHTML = renderizarInicio();
     }
 }
