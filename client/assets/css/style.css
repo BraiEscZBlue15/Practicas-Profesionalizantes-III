@@ -1,0 +1,449 @@
+/* ==========================================================================
+   ESTILOS BASE Y VARIABLES GLOBALES
+   ========================================================================== */
+
+:root {
+    /* Paleta de Colores (Extraída de la imagen) */
+    --color-primary: #0A3771; /* Azul corporativo */
+    --color-primary-hover: #072a5a;
+    --color-accent: #6af7e6; /* Cyan para el badge */
+    --color-accent-text: #056A5C;
+    
+    --color-surface: #FFFFFF; /* Blanco para tarjetas */
+    --color-background: #F7F9FC; /* Gris muy claro para el fondo */
+    
+    /* Textos */
+    --text-main: #1E293B; /* Texto oscuro/títulos */
+    --text-muted: #475569; /* Texto de párrafos */
+    --text-light: #94A3B8; /* Texto desactivado o muy secundario */
+    
+    /* Estados y grises */
+    --gray-100: #F1F5F9;
+    --gray-200: #E2E8F0;
+    
+    /* Tipografía */
+    --font-family: 'Inter', sans-serif;
+    
+    /* Espaciado */
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 3rem;
+    
+    /* Radios de borde */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 32px;
+    
+    /* Sombras y transiciones */
+    --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.025);
+    --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.03), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
+    --transition: all 0.3s ease;
+}
+
+/* Reseteo básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--color-background);
+    color: var(--text-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1800px; /* Aumentado para visualizador de planos */
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ==========================================================================
+   COMPONENTES
+   ========================================================================== */
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-1px);
+}
+
+.btn-disabled {
+    background-color: var(--gray-200);
+    color: var(--text-light);
+    cursor: not-allowed;
+}
+
+.btn-icon {
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.btn-icon:hover {
+    background-color: var(--gray-100);
+}
+
+/* Badges / Etiquetas */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.badge-accent {
+    background-color: var(--color-accent);
+    color: var(--color-accent-text);
+}
+
+.badge-gray {
+    background-color: var(--gray-100);
+    color: var(--text-light);
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+}
+
+/* ==========================================================================
+   LAYOUT Y SECCIONES
+   ========================================================================== */
+
+/* Header / Navegación */
+.header {
+    background-color: var(--color-background);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+}
+
+.nav {
+    display: none; /* Se oculta en móvil por defecto */
+}
+
+@media (min-width: 768px) {
+    .nav {
+        display: block;
+    }
+}
+
+.nav-list {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--color-primary);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Hero Section */
+.hero {
+    margin-top: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.hero-card {
+    position: relative;
+    min-height: 480px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 4rem;
+    
+    /* Imagen de fondo utilizando la generada localmente. 
+       Añadido un ligero superpuesto para asegurar legibilidad */
+    background-image: linear-gradient(
+        to right, 
+        rgba(247, 249, 252, 0.95) 0%, 
+        rgba(247, 249, 252, 0.8) 40%, 
+        rgba(247, 249, 252, 0) 100%
+    ), url('../img/hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    box-shadow: var(--shadow-card);
+}
+
+.hero-content {
+    max-width: 550px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    color: var(--color-primary);
+    margin: 1.5rem 0 1rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* Media query para móviles en el Hero */
+@media (max-width: 768px) {
+    .hero-card {
+        padding: 2.5rem;
+        min-height: auto;
+        /* En móvil, incrementamos la opacidad del fondo blanco para que el texto sea siempre legible */
+        background-image: linear-gradient(
+            rgba(255, 255, 255, 0.9), 
+            rgba(255, 255, 255, 0.9)
+        ), url('../img/hero-bg.png');
+    }
+    .hero-title {
+        font-size: 2.2rem;
+    }
+}
+
+/* Tools Section */
+.tools-section {
+    padding-bottom: 5rem;
+}
+
+.tools-header {
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+/* Grilla */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Tarjetas */
+.card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+}
+
+.card-disabled:hover {
+    transform: none;
+    box-shadow: var(--shadow-card);
+}
+
+.card-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Reajustar margin si está en flex-header */
+.card-header-flex .card-icon {
+    margin-bottom: 0;
+}
+
+.icon-cyan {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+}
+
+.icon-gray {
+    background-color: var(--gray-100);
+    color: var(--text-muted);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.75rem;
+}
+
+.card-text {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    flex-grow: 1; /* Esto empuja el botón al fondo si las tarjetas tienen diferentes alturas */
+    margin-bottom: 2rem;
+}
+
+.card-action {
+    margin-top: auto;
+}
+
+/* Footer */
+.footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border-top: 1px solid var(--gray-200);
+    margin-top: auto;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.footer-brand .logo {
+    margin-bottom: 0.5rem;
+}
+
+.copyright {
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.footer-links a:hover {
+    color: var(--color-primary);
+}
