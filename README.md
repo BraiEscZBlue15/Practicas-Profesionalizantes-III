@@ -2,7 +2,7 @@ PROYECTO: "ESCUELAS SEGURAS"
 
 DESCRIPCIÓN: Plataforma web y aplicacion mobile de gestión de seguridad e higiene para establecimientos educativos. Permite administrar planos de evacuación, protocolos, contactos de emergencia y recursos complementarios, con control de acceso por roles y reportes del personal.
 
-INTEGRANTES: -LUCIA JIMENEZ(Frontend) -MARTA VIÑABAL(QA/Tester) -DARIO SALVADORE(Backend) -BRAIAN ESCALANTE(Backend)
+INTEGRANTES: -LUCIA JIMENEZ(Frontend) -MARTA VIÑABAL(QA/Tester-Frontend) -DARIO SALVADORE(Backend) -BRAIAN ESCALANTE(Backend)
 
 COMO INSTALAR Y EJECUTAR EL PROYECTO:
 Requisitos previos: necesitás tener instalado Visual Studio Code con la extensión Live Server, un navegador actualizado como Chrome o Firefox.
