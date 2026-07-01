@@ -2,10 +2,23 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { documentosService, usuariosService, institucionesService } from '../services/supabaseClient'
 import { storageService } from '../services/supabaseStorage'
+import { useAuth } from '../context/AuthContext'
 import './Documentos.css'
 
 function Documentos() {
   const navigate = useNavigate()
+  const { user, esAdministrador } = useAuth()
+
+  const puedeEditarDocumento = (doc) => {
+    if (esAdministrador) return true
+
+    const creatorId = typeof doc.createdBy === 'object' ? doc.createdBy?.userId : doc.createdBy
+    const ownerId = typeof doc.owner === 'object' ? doc.owner?.userId : doc.owner
+
+    if (!user?.userId) return false
+
+    return creatorId === user.userId || ownerId === user.userId
+  }
   const [documentos, setDocumentos] = useState([])
   const [usuarios, setUsuarios] = useState([])
   const [instituciones, setInstituciones] = useState([])
@@ -21,7 +34,7 @@ function Documentos() {
     tier3: false,
     tier4: false
   })
-  
+
   // Estado del formulario
   const [showForm, setShowForm] = useState(false)
   const [editingId, setEditingId] = useState(null)
@@ -30,8 +43,7 @@ function Documentos() {
     type: '',
     url: '',
     institution: '',
-    owner: '',
-    createdBy: ''
+    owner: ''
   })
 
   // Cargar datos iniciales y verificar rol
@@ -45,19 +57,19 @@ function Documentos() {
       // Intentar obtener del localStorage primero
       const storedUser = localStorage.getItem('user')
       console.log('💾 localStorage.user (raw):', storedUser)
-      
+
       if (storedUser) {
         const user = JSON.parse(storedUser)
         console.log('📋 Usuario parseado completo:', user)
         console.log('🎭 user.role:', user.role)
         console.log('📝 user.role?.name:', user.role?.name)
-        
+
         // Si el rol no está enriquecido (es solo un UUID string), buscar el usuario completo
         if (user.userId && (!user.role || typeof user.role === 'string')) {
           console.log('⚠️ Rol no enriquecido, obteniendo desde Supabase...')
           const fullUser = await usuariosService.getById(user.userId)
           console.log('📥 Usuario completo desde Supabase:', fullUser)
-          
+
           // Actualizar localStorage con datos completos
           const updatedUser = {
             email: fullUser.email,
@@ -67,7 +79,7 @@ function Documentos() {
             role: fullUser.role
           }
           localStorage.setItem('user', JSON.stringify(updatedUser))
-          
+
           const roleName = fullUser.role?.name?.toLowerCase()
           setUserRole(roleName)
           console.log('✅ Rol actualizado:', roleName)
@@ -120,19 +132,19 @@ function Documentos() {
       // Forzar descarga del archivo
       const response = await fetch(url)
       if (!response.ok) throw new Error('Error al descargar el archivo')
-      
+
       const blob = await response.blob()
-      
+
       // Crear enlace temporal y forzar descarga
       const blobUrl = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = blobUrl
       link.download = fileName || 'documento'
       link.style.display = 'none'
-      
+
       document.body.appendChild(link)
       link.click()
-      
+
       // Limpiar después de un pequeño delay
       setTimeout(() => {
         document.body.removeChild(link)
@@ -171,18 +183,8 @@ function Documentos() {
 
       // Si hay un archivo seleccionado, subirlo primero
       if (selectedFile) {
-        // Obtener userId del campo "createdBy" o del localStorage
-        let userId = formData.createdBy
-        
-        // Si no hay createdBy seleccionado, intentar obtener del localStorage
-        if (!userId) {
-          const storedUser = localStorage.getItem('user')
-          if (storedUser) {
-            const user = JSON.parse(storedUser)
-            userId = user.userId
-          }
-        }
-        
+        let userId = user?.userId || null
+
         // Si es administrador y tiene checkboxes seleccionados, usar tier manual
         let manualTier = null
         if (userRole === 'administrador') {
@@ -194,16 +196,16 @@ function Documentos() {
             manualTier = `tier${maxTierNumber}`
           }
         }
-        
+
         // Subir archivo con userId y tier manual (si existe)
         const uploadResult = await storageService.uploadFile(
-          selectedFile, 
-          'archivos', 
+          selectedFile,
+          'archivos',
           userId,
           manualTier
         )
         fileUrl = uploadResult.url
-        
+
         console.log(`Archivo subido con tier: ${uploadResult.tier}`)
       }
 
@@ -217,19 +219,20 @@ function Documentos() {
         type: formData.type || selectedFile?.type || null,
         url: fileUrl,
         institution: formData.institution || null,
-        owner: formData.owner || null,
-        createdBy: formData.createdBy || null,
-        modifiedBy: formData.createdBy || null
+        owner: formData.owner || null
       }
 
       if (editingId) {
+        submitData.modifiedBy = user?.userId || null
         await documentosService.update(editingId, submitData)
       } else {
+        submitData.createdBy = user?.userId || null
+        submitData.modifiedBy = user?.userId || null
         await documentosService.create(submitData)
       }
 
       // Limpiar y recargar
-      setFormData({ name: '', type: '', url: '', institution: '', owner: '', createdBy: '' })
+      setFormData({ name: '', type: '', url: '', institution: '', owner: '' })
       setSelectedFile(null)
       setEditingId(null)
       setShowForm(false)
@@ -247,8 +250,7 @@ function Documentos() {
       type: documento.type || '',
       url: documento.url,
       institution: documento.institution?.institutionId || '',
-      owner: documento.owner?.userId || '',
-      createdBy: documento.createdBy?.userId || ''
+      owner: documento.owner?.userId || ''
     })
     setEditingId(documento.documentId)
     setShowForm(true)
@@ -266,7 +268,7 @@ function Documentos() {
   }
 
   const handleCancel = () => {
-    setFormData({ name: '', type: '', url: '', institution: '', owner: '', createdBy: '' })
+    setFormData({ name: '', type: '', url: '', institution: '', owner: '' })
     setSelectedFile(null)
     setSelectedTiers({ tier1: false, tier2: false, tier3: false, tier4: false })
     setEditingId(null)
@@ -276,14 +278,14 @@ function Documentos() {
   const handleNewClick = () => {
     // Verificar si el usuario está autenticado
     const user = localStorage.getItem('user')
-    
+
     if (!user) {
       // Redirigir al login si no está autenticado
       navigate('/login')
       return
     }
 
-    setFormData({ name: '', type: '', url: '', institution: '', owner: '', createdBy: '' })
+    setFormData({ name: '', type: '', url: '', institution: '', owner: '' })
     setSelectedFile(null)
     setSelectedTiers({ tier1: false, tier2: false, tier3: false, tier4: false })
     setEditingId(null)
@@ -325,7 +327,7 @@ function Documentos() {
       <div className="container">
         <div className="page-header">
           <h1>Gestión de Documentos</h1>
-          <button 
+          <button
             onClick={handleNewClick}
             className="btn btn-primary"
           >
@@ -345,7 +347,7 @@ function Documentos() {
           <div className="card form-card">
             <h2>{editingId ? 'Editar Documento' : 'Nuevo Documento'}</h2>
             <form onSubmit={handleSubmit} className="form">
-              
+
               {/* Selector de Archivo */}
               {!editingId && (
                 <div className="form-group">
@@ -376,7 +378,7 @@ function Documentos() {
                 <div className="form-group tier-selection">
                   <label>🎯 Permisos de Acceso al Documento</label>
                   <p className="tier-helper">
-                    {userRole === 'administrador' 
+                    {userRole === 'administrador'
                       ? 'Selecciona los roles que podrán acceder a este documento'
                       : `Solo administradores pueden cambiar permisos. Tu rol: ${userRole || 'desconocido'}`
                     }
@@ -505,28 +507,13 @@ function Documentos() {
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="createdBy">Creado por</label>
-                <select
-                  id="createdBy"
-                  value={formData.createdBy}
-                  onChange={(e) => setFormData({ ...formData, createdBy: e.target.value })}
-                >
-                  <option value="">Seleccionar usuario...</option>
-                  {usuarios.map((user) => (
-                    <option key={user.userId} value={user.userId}>
-                      {user.name} {user.surname}
-                    </option>
-                  ))}
-                </select>
-              </div>
 
               <div className="form-actions">
                 <button type="submit" className="btn btn-primary" disabled={uploading}>
                   {uploading ? 'Subiendo...' : (editingId ? 'Actualizar' : 'Crear')}
                 </button>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={handleCancel}
                   className="btn btn-secondary"
                   disabled={uploading}
@@ -550,7 +537,7 @@ function Documentos() {
               className="search-input"
             />
             {searchTerm && (
-              <button 
+              <button
                 onClick={() => {
                   setSearchTerm('')
                   fetchDocumentos()
@@ -578,7 +565,7 @@ function Documentos() {
             <div className="empty-state">
               <span className="empty-icon">📄</span>
               <p>
-                {searchTerm 
+                {searchTerm
                   ? 'No se encontraron resultados para tu búsqueda'
                   : 'No hay documentos registrados. ¡Crea el primero!'}
               </p>
@@ -593,7 +580,7 @@ function Documentos() {
                       {doc.type && <span className="badge badge-type">{doc.type}</span>}
                     </div>
                   </div>
-                  
+
                   <div className="documento-body">
                     <div className="documento-info">
                       <div className="info-row">
@@ -606,9 +593,9 @@ function Documentos() {
                       </div>
                       <div className="info-row">
                         <span className="info-label">🔗 URL:</span>
-                        <a 
-                          href={doc.url} 
-                          target="_blank" 
+                        <a
+                          href={doc.url}
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="documento-link"
                           title={doc.url}
@@ -617,7 +604,7 @@ function Documentos() {
                         </a>
                       </div>
                     </div>
-                    
+
                     <div className="documento-meta">
                       <small>
                         Creado: {formatDate(doc.createdAt)}
@@ -640,20 +627,24 @@ function Documentos() {
                     >
                       📥 Descargar
                     </button>
-                    <button
-                      onClick={() => handleEdit(doc)}
-                      className="btn-action btn-edit"
-                      title="Editar"
-                    >
-                      ✏️ Editar
-                    </button>
-                    <button
-                      onClick={() => handleDelete(doc.documentId, doc.name)}
-                      className="btn-action btn-delete"
-                      title="Eliminar"
-                    >
-                      🗑️ Eliminar
-                    </button>
+                    {puedeEditarDocumento(doc) && (
+                      <button
+                        onClick={() => handleEdit(doc)}
+                        className="btn-action btn-edit"
+                        title="Editar"
+                      >
+                        ✏️ Editar
+                      </button>
+                    )}
+                    {puedeEditarDocumento(doc) && (
+                      <button
+                        onClick={() => handleDelete(doc.documentId, doc.name)}
+                        className="btn-action btn-delete"
+                        title="Eliminar"
+                      >
+                        🗑️ Eliminar
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}

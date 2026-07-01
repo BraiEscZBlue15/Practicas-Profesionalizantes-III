@@ -29,7 +29,7 @@ const SeccionInicio = () => {
                 <h2>Panel de Control</h2>
                 <p>Resumen del contenido publicado en la página base</p>
             </div>
-            <div className="resumen-grid">
+            {/* <div className="resumen-grid">
                 <div className="resumen-card">
                     <i className="ph ph-map-pin"></i>
                     <div className="resumen-valor">{stats.plano ? "Cargado" : "No cargado"}</div>
@@ -50,7 +50,7 @@ const SeccionInicio = () => {
                     <div className="resumen-valor">{stats.contactos}</div>
                     <div className="resumen-label">Contactos de emergencia</div>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };

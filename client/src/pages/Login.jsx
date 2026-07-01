@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../services/supabaseAuth'
 import { usuariosService } from '../services/supabaseClient'
+import { useAuth } from '../context/AuthContext'
 import './Login.css'
 
 function Login() {
   const navigate = useNavigate()
+  const { verificarSesion } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -93,6 +95,9 @@ function Login() {
         }))
       }
 
+      // Actualizar el estado global del contexto de autenticación
+      verificarSesion()
+
       // Redirigir a documentos
       navigate('/documentos')
     } catch (err) {
@@ -104,6 +109,10 @@ function Login() {
 
   const handleRegisterClick = () => {
     navigate('/register')
+  }
+
+  const handleForgotPasswordClick = () => {
+    navigate('/forgot-password')
   }
 
   return (
@@ -154,6 +163,14 @@ function Login() {
                 required
               />
             </div>
+
+            <button
+              type="button"
+              className="btn-link-forgot"
+              onClick={handleForgotPasswordClick}
+            >
+              ¿Olvidaste tu contraseña?
+            </button>
 
             <button 
               type="submit" 

@@ -141,6 +141,25 @@
   cursor: not-allowed;
 }
 
+.btn-link-forgot {
+  background: none;
+  border: none;
+  color: #7c3aed;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: right;
+  width: 100%;
+  margin-top: -0.35rem;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.btn-link-forgot:hover {
+  color: #5b21b6;
+  text-decoration: underline;
+}
+
 .login-divider {
   text-align: center;
   margin: 1.5rem 0;

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../services/supabaseAuth';
+import { institucionesService } from '../../services/supabaseClient';
 import { useAuth } from '../../context/AuthContext';
 
 const SeccionProtocolos = () => {
@@ -22,13 +23,7 @@ const SeccionProtocolos = () => {
 
     const cargarInstituciones = async () => {
         try {
-            const { data, error } = await supabase
-                .from('instituciones')
-                .select('institutionId, name')
-                .eq('active', true)
-                .order('name', { ascending: true });
-
-            if (error) throw error;
+            const data = await institucionesService.getAll();
             setInstituciones(data || []);
         } catch (err) {
             console.error('Error al cargar instituciones:', err);

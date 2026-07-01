@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { usuariosService, institucionesService, rolesService } from '../../services/supabaseClient'
+import './SeccionGestionUsuarios.css'
 
 function SeccionGestionUsuarios() {
   const [instituciones, setInstituciones] = useState([])
@@ -181,14 +182,14 @@ function SeccionGestionUsuarios() {
       </div>
 
       {error && (
-        <div className="error-banner" style={{ marginBottom: '1rem' }}>
+        <div className="error-banner">
           <span>⚠️</span>
           <span>{error}</span>
         </div>
       )}
 
       {/* Filtro por Institución */}
-      <div className="filtros-container" style={{ marginBottom: '2rem' }}>
+      <div className="filtros-container">
         <div className="form-group">
           <label htmlFor="institution-filter">
             <span className="label-icon">🏫</span>
@@ -198,7 +199,6 @@ function SeccionGestionUsuarios() {
             id="institution-filter"
             value={selectedInstitution}
             onChange={(e) => setSelectedInstitution(e.target.value)}
-            style={{ maxWidth: '400px' }}
           >
             <option value="">-- Seleccione una institución --</option>
             {instituciones.map((inst) => (
@@ -214,87 +214,24 @@ function SeccionGestionUsuarios() {
       {selectedInstitution && (
         <div className="usuarios-table-container">
           {loading ? (
-            <div style={{ textAlign: 'center', padding: '2rem' }}>
+            <div className="loading">
               <p>Cargando usuarios...</p>
             </div>
           ) : usuarios.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
+            <div className="empty-state">
               <p>No hay usuarios registrados en esta institución</p>
             </div>
           ) : (
-            <div style={{ 
-              overflowX: 'auto',
-              backgroundColor: 'white',
-              borderRadius: '8px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-            }}>
-              <table className="usuarios-table" style={{ 
-                width: '100%', 
-                borderCollapse: 'collapse',
-                minWidth: '1000px'
-              }}>
+            <table className="usuarios-table">
                 <thead>
-                  <tr style={{ 
-                    backgroundColor: '#2563eb',
-                    color: 'white',
-                    borderBottom: '2px solid #1d4ed8'
-                  }}>
-                    <th style={{ 
-                      padding: '1rem 0.75rem', 
-                      textAlign: 'left',
-                      fontWeight: '600',
-                      fontSize: '0.9rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px'
-                    }}>Nombre</th>
-                    <th style={{ 
-                      padding: '1rem 0.75rem', 
-                      textAlign: 'left',
-                      fontWeight: '600',
-                      fontSize: '0.9rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px'
-                    }}>Apellido</th>
-                    <th style={{ 
-                      padding: '1rem 0.75rem', 
-                      textAlign: 'left',
-                      fontWeight: '600',
-                      fontSize: '0.9rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px'
-                    }}>Email</th>
-                    <th style={{ 
-                      padding: '1rem 0.75rem', 
-                      textAlign: 'left',
-                      fontWeight: '600',
-                      fontSize: '0.9rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px'
-                    }}>Rol</th>
-                    <th style={{ 
-                      padding: '1rem 0.75rem', 
-                      textAlign: 'center',
-                      fontWeight: '600',
-                      fontSize: '0.9rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px'
-                    }}>Estado</th>
-                    <th style={{ 
-                      padding: '1rem 0.75rem', 
-                      textAlign: 'center',
-                      fontWeight: '600',
-                      fontSize: '0.9rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px'
-                    }}>Mensaje</th>
-                    <th style={{ 
-                      padding: '1rem 0.75rem', 
-                      textAlign: 'center',
-                      fontWeight: '600',
-                      fontSize: '0.9rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px'
-                    }}>Acciones</th>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Mensaje</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
               <tbody>
@@ -302,25 +239,10 @@ function SeccionGestionUsuarios() {
                   const isEditing = editingUser === user.userId
                   const isPending = user.pending === true
                   
+                  const rowClassName = isPending ? 'pending-row' : (isEditing ? 'editing-row' : '')
+                  
                   return (
-                    <tr
-                      key={user.userId}
-                      style={{
-                        backgroundColor: isPending ? '#fff3cd' : (isEditing ? '#e3f2fd' : 'white'),
-                        borderBottom: '1px solid #e0e0e0',
-                        transition: 'all 0.2s ease',
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isEditing && !isPending) {
-                          e.currentTarget.style.backgroundColor = '#f5f5f5'
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isEditing && !isPending) {
-                          e.currentTarget.style.backgroundColor = 'white'
-                        }
-                      }}
-                    >
+                    <tr key={user.userId} className={rowClassName}>
                       {isEditing ? (
                         <>
                           {/* Modo Edición */}
@@ -667,20 +589,13 @@ function SeccionGestionUsuarios() {
                 })}
               </tbody>
             </table>
-            </div>
           )}
         </div>
       )}
 
       {!selectedInstitution && (
-        <div style={{ 
-          textAlign: 'center', 
-          padding: '3rem', 
-          color: '#666',
-          backgroundColor: '#f8f9fa',
-          borderRadius: '8px'
-        }}>
-          <p style={{ fontSize: '1.1rem' }}>👆 Selecciona una institución para ver sus usuarios</p>
+        <div className="empty-state">
+          <p>👆 Selecciona una institución para ver sus usuarios</p>
         </div>
       )}
     </div>

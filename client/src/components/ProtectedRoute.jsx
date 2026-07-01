@@ -1,8 +1,8 @@
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const ProtectedRoute = ({ children, requiredPermission }) => {
-    const { sesion, cargando, tienePermiso } = useAuth();
+const ProtectedRoute = ({ children, requiredPermission, requiredRole }) => {
+    const { sesion, cargando, tienePermiso, tieneRol } = useAuth();
 
     if (cargando) {
         return (
@@ -19,6 +19,10 @@ const ProtectedRoute = ({ children, requiredPermission }) => {
 
     if (!sesion) {
         return <Navigate to="/login" replace />;
+    }
+
+    if (requiredRole && !tieneRol(requiredRole)) {
+        return <Navigate to="/" replace />;
     }
 
     if (requiredPermission && !tienePermiso(requiredPermission)) {

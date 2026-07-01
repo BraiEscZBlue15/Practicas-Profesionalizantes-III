@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PERMISOS } from '../data/constants';
+import { supabase } from '../services/supabaseAuth';
 
 export const AuthContext = createContext(null);
 
@@ -16,6 +17,7 @@ export const AuthProvider = ({ children }) => {
     const [sesion, setSesion] = useState(null);
     const [cargando, setCargando] = useState(true);
     const navigate = useNavigate();
+    const ADMIN_ROLES = ['administrador', 'admin'];
 
     useEffect(() => {
         verificarSesion();
@@ -64,7 +66,12 @@ export const AuthProvider = ({ children }) => {
         return { success: false, error: "Usar el componente Login.jsx para autenticación" };
     };
 
-    const cerrarSesion = () => {
+    const cerrarSesion = async () => {
+        try {
+            await supabase.auth.signOut();
+        } catch (error) {
+            console.error('Error al cerrar sesión en Supabase:', error);
+        }
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         setSesion(null);
@@ -91,13 +98,27 @@ export const AuthProvider = ({ children }) => {
         return tieneAcceso;
     };
 
+    const tieneRol = (rolesRequeridos) => {
+        if (!sesion?.rol) {
+            return false;
+        }
+
+        const roles = Array.isArray(rolesRequeridos) ? rolesRequeridos : [rolesRequeridos];
+        return roles.map((rol) => rol.toLowerCase()).includes(sesion.rol);
+    };
+
+    const esAdministrador = tieneRol(ADMIN_ROLES);
+
     const value = {
         sesion,
         user: sesion?.userData || null, // Exponer userData como 'user' para compatibilidad
         cargando,
         login,
         cerrarSesion,
-        tienePermiso
+        tienePermiso,
+        tieneRol,
+        esAdministrador,
+        verificarSesion
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

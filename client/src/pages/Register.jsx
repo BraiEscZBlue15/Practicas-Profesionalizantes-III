@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { usuariosService, institucionesService, rolesService } from '../services/supabaseClient'
-import { supabase } from '../services/supabaseAuth'
 import './Register.css'
 
 function Register() {
@@ -26,33 +25,14 @@ function Register() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        // Cargar instituciones directamente desde Supabase SIN autenticación
-        // Usar query anónima (anon key permite lectura si RLS lo permite)
-        const { data: institucionesData, error: instError } = await supabase
-          .from('instituciones')
-          .select('institutionId, name')
-          .eq('active', true)
-          .order('name', { ascending: true })
-        
-        if (instError) {
-          console.error('Error cargando instituciones:', instError)
-        } else {
-          setInstituciones(institucionesData || [])
-        }
+        const institucionesData = await institucionesService.getAll()
+        setInstituciones(institucionesData || [])
         
         // Buscar el rol 'publico' por su nombre usando query anónima
-        const { data: rolesData, error: rolesError } = await supabase
-          .from('roles')
-          .select('roleId, name')
-          .eq('active', true)
-        
-        if (rolesError) {
-          console.error('Error cargando roles:', rolesError)
-        } else {
-          const publicoRole = rolesData?.find(r => r.name.toLowerCase() === 'publico')
-          if (publicoRole) {
-            setPublicoRoleId(publicoRole.roleId)
-          }
+        const rolesData = await rolesService.getAll()
+        const publicoRole = rolesData?.find(r => r.name.toLowerCase() === 'publico')
+        if (publicoRole) {
+          setPublicoRoleId(publicoRole.roleId)
         }
       } catch (err) {
         console.error('Error cargando datos:', err)

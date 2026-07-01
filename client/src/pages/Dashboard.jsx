@@ -44,41 +44,41 @@ function Dashboard() {
           <aside className="sidebar">
             <nav className="sidebar-nav">
               <span className="sidebar-label">Panel de Control</span>
-              <button 
+              <button
                 className={`sidebar-btn ${seccionActiva === 'inicio' ? 'active' : ''}`}
                 onClick={() => setSeccionActiva('inicio')}
               >
                 <i className="ph ph-house"></i> Inicio
               </button>
-              
+
               <span className="sidebar-label" style={{ marginTop: '1rem' }}>Contenido</span>
-              <button 
+              <button
                 className={`sidebar-btn ${seccionActiva === 'planos' ? 'active' : ''}`}
                 onClick={() => setSeccionActiva('planos')}
               >
                 <i className="ph ph-map-pin"></i> Planos
               </button>
-              <button 
+              <button
                 className={`sidebar-btn ${seccionActiva === 'contactos' ? 'active' : ''}`}
                 onClick={() => setSeccionActiva('contactos')}
               >
                 <i className="ph ph-phone-call"></i> Contactos
               </button>
-              <button 
+              <button
                 className={`sidebar-btn ${seccionActiva === 'protocolos' ? 'active' : ''}`}
                 onClick={() => setSeccionActiva('protocolos')}
               >
                 <i className="ph ph-clipboard-text"></i> Protocolos
               </button>
-              <button 
+              <button
                 className={`sidebar-btn ${seccionActiva === 'recursos' ? 'active' : ''}`}
                 onClick={() => setSeccionActiva('recursos')}
               >
                 <i className="ph ph-book-open"></i> Recursos
               </button>
-              
+
               <span className="sidebar-label" style={{ marginTop: '1rem' }}>Administración</span>
-              <button 
+              <button
                 className={`sidebar-btn ${seccionActiva === 'gestion-usuarios' ? 'active' : ''}`}
                 onClick={() => setSeccionActiva('gestion-usuarios')}
               >

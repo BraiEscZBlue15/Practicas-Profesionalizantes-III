@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react'
 import { institucionesService } from '../services/supabaseClient'
+import { useAuth } from '../context/AuthContext'
 import './Instituciones.css'
 
 function Instituciones() {
+  const { tieneRol } = useAuth()
+  const puedeCrearEditar = tieneRol(['administrador', 'admin', 'directivo'])
   const [instituciones, setInstituciones] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
-  
+
   // Estado del formulario
   const [showForm, setShowForm] = useState(false)
   const [editingId, setEditingId] = useState(null)
@@ -112,12 +115,14 @@ function Instituciones() {
       <div className="container">
         <div className="page-header">
           <h1>Gestión de Instituciones</h1>
-          <button 
-            onClick={handleNewClick}
-            className="btn btn-primary"
-          >
-            + Nueva Institución
-          </button>
+          {puedeCrearEditar && (
+            <button
+              onClick={handleNewClick}
+              className="btn btn-primary"
+            >
+              + Nueva Institución
+            </button>
+          )}
         </div>
 
         {error && (
@@ -128,7 +133,7 @@ function Instituciones() {
         )}
 
         {/* Formulario de Creación/Edición */}
-        {showForm && (
+        {showForm && puedeCrearEditar && (
           <div className="card form-card">
             <h2>{editingId ? 'Editar Institución' : 'Nueva Institución'}</h2>
             <form onSubmit={handleSubmit} className="form">
@@ -160,8 +165,8 @@ function Instituciones() {
                 <button type="submit" className="btn btn-primary">
                   {editingId ? 'Actualizar' : 'Crear'}
                 </button>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={handleCancel}
                   className="btn btn-secondary"
                 >
@@ -184,7 +189,7 @@ function Instituciones() {
               className="search-input"
             />
             {searchTerm && (
-              <button 
+              <button
                 onClick={() => {
                   setSearchTerm('')
                   fetchInstituciones()
@@ -212,7 +217,7 @@ function Instituciones() {
             <div className="empty-state">
               <span className="empty-icon">🏫</span>
               <p>
-                {searchTerm 
+                {searchTerm
                   ? 'No se encontraron resultados para tu búsqueda'
                   : 'No hay instituciones registradas. ¡Crea la primera!'}
               </p>
@@ -224,7 +229,7 @@ function Instituciones() {
                   <div className="institucion-header">
                     <h3>{inst.name}</h3>
                   </div>
-                  
+
                   <div className="institucion-body">
                     {inst.address && (
                       <p className="institucion-address">
@@ -232,28 +237,30 @@ function Instituciones() {
                         {inst.address}
                       </p>
                     )}
-                    
+
                     <div className="institucion-meta">
                       <small>Creada: {new Date(inst.createdAt).toLocaleDateString()}</small>
                     </div>
                   </div>
 
-                  <div className="institucion-actions">
-                    <button
-                      onClick={() => handleEdit(inst)}
-                      className="btn-action btn-edit"
-                      title="Editar"
-                    >
-                      ✏️ Editar
-                    </button>
-                    <button
-                      onClick={() => handleDelete(inst.institutionId, inst.name)}
-                      className="btn-action btn-delete"
-                      title="Eliminar"
-                    >
-                      🗑️ Eliminar
-                    </button>
-                  </div>
+                  {puedeCrearEditar && (
+                    <div className="institucion-actions">
+                      <button
+                        onClick={() => handleEdit(inst)}
+                        className="btn-action btn-edit"
+                        title="Editar"
+                      >
+                        ✏️ Editar
+                      </button>
+                      <button
+                        onClick={() => handleDelete(inst.institutionId, inst.name)}
+                        className="btn-action btn-delete"
+                        title="Eliminar"
+                      >
+                        🗑️ Eliminar
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

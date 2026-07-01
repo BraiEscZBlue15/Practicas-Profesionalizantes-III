@@ -1,0 +1,224 @@
+.under-construction-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  background: radial-gradient(circle at 50% 50%, #f8fafc 0%, #edf2f7 100%);
+  min-height: calc(100vh - 70px); /* Adjusts for average Navbar height */
+}
+
+/* Ambient blur spheres */
+.ambient-sphere {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 1;
+  opacity: 0.15;
+}
+
+.sphere-primary {
+  width: 400px;
+  height: 400px;
+  background: var(--primary-color);
+  top: -100px;
+  right: -100px;
+  animation: floatSphere 8s ease-in-out infinite alternate;
+}
+
+.sphere-secondary {
+  width: 300px;
+  height: 300px;
+  background: var(--secondary-color);
+  bottom: -50px;
+  left: -50px;
+  animation: floatSphere 12s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatSphere {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(30px, 30px) scale(1.1);
+  }
+}
+
+/* Glassmorphism Card */
+.under-construction-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 1.5rem;
+  padding: 3rem 2.5rem;
+  max-width: 550px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08), 
+              inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Icon Container & Animations */
+.icon-container {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(5, 150, 105, 0.1));
+  border-radius: 50%;
+  padding: 1rem;
+}
+
+.construction-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.gear-outer {
+  transform-origin: 50% 50%;
+  animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.pulse-dot {
+  animation: pulse 2s infinite ease-in-out;
+  transform-origin: 50% 46px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+    filter: drop-shadow(0 0 6px var(--accent-color));
+  }
+}
+
+/* Typography */
+.construction-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.construction-subtitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 1.5rem;
+}
+
+.construction-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+/* Progress bar section */
+.progress-section {
+  width: 100%;
+  background: rgba(241, 245, 249, 0.6);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+
+.progress-percentage {
+  color: var(--primary-color);
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background-color: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar-fill {
+  width: 75%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 4px;
+  position: relative;
+  animation: progressPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes progressPulse {
+  0%, 100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.1);
+  }
+}
+
+.progress-status {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* Back Button */
+.btn-back {
+  width: 100%;
+  max-width: 200px;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-back:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+.btn-back:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustment */
+@media (max-width: 600px) {
+  .under-construction-card {
+    padding: 2rem 1.5rem;
+  }
+  .construction-title {
+    font-size: 1.8rem;
+  }
+}

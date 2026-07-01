@@ -168,8 +168,20 @@ export const authService = {
   /**
    * Resetear contraseña
    */
-  resetPassword: async (email) => {
-    const { error } = await supabase.auth.resetPasswordForEmail(email)
+  resetPassword: async (email, redirectTo) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo
+    })
+    if (error) throw error
+  },
+
+  /**
+   * Actualizar contraseña del usuario autenticado por recovery link
+   */
+  updatePassword: async (newPassword) => {
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword
+    })
     if (error) throw error
   }
 }
