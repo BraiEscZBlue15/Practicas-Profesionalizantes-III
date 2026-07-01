@@ -13,6 +13,6 @@ El proyecto Escuelas Seguras fue desarrollado en su versión web con HTML5, CSS3
 
 Credenciales de prueba: admin: admin@sanmiguel.edu.ar  contraseña: admin123. Profesor: profesor@sanmiguel.edu.ar contraseña: profesor123. Estudiante: estudiante@sanmiguel.edu.ar contraseña: estudiante123. Personal: personal@sanmiguel.edu.ar contraseña: personal123.
 
-Nota importante: el proyecto está en fase de desarrollo y actualmente usa localStorage para persistencia de datos en modo prueba. Para la versión mobile se migrará a Supabase como base de datos remota.
+Nota importante: el proyecto está en fase de desarrollo y actualmente usa localStorage para persistencia de datos en modo prueba. Para la versión web y la versión mobile, proximamente se migrará a Supabase como base de datos remota.
 
     
